@@ -1,1 +1,1 @@
-# BirthdaysCalendar
+# birthdays-calendar
