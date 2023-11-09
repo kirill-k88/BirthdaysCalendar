@@ -1,0 +1,26 @@
+$month-margin: 10vw;
+
+.month {
+  margin-top: calc($month-margin / 2);
+  width: calc(100vw - $month-margin);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10%;
+  border: 1px solid gray;
+  .month__header {
+    font-size: 40px;
+  }
+  .month__day-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+
+    .div {
+      outline: 1px solid blue;
+      min-width: 200px;
+      min-height: 400px;
+    }
+  }
+}
