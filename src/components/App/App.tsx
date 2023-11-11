@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.scss';
 import { Header } from '../Header/Header';
+import { Footer } from '../Footer/Footer';
 import { Month } from '../Month/Month';
 import { createNewDate } from '../../utils/dateFunctions';
 import { CurrentDateContext } from '../../contexts/CurrentDateContext';
@@ -15,6 +16,7 @@ export function App() {
       <div className="app">
         <Header />
         <Month setCurentDate={setCurentDate} />
+        <Footer />
       </div>
     </CurrentDateContext.Provider>
   );

@@ -1,20 +1,52 @@
 $month-margin: 10vw;
 
 .month {
-  width: calc(100%);
-  height: calc(100vh - 100px);
+  width: 100%;
+  min-width: 860px;
+  height: 700px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   border: 1px solid goldenrod;
   background-image: url('../../images/Month/month-background.jpg');
+
+  .month__side-decoration {
+    min-width: 150px;
+    height: 100%;
+    background-image: url('../../images/Month/month-side-decoration.png');
+    background-repeat: repeat-y;
+    background-size: 70% 50%;
+  }
+
+  .month__side-decoration_rigth {
+    margin-left: 30px;
+    border-left: 10px double goldenrod;
+    background-position: 25px 0;
+  }
+
+  .month__side-decoration_left {
+    margin-right: 30px;
+    border-right: 10px double goldenrod;
+    background-position: 20px 0;
+  }
+
+  .month__day-list-container {
+    width: calc(100% - 360px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
   .month__header-container {
     display: flex;
     align-items: center;
 
     .month__header {
+      margin: 10px 0;
       font-size: 40px;
+      line-height: 1;
+      height: 40px;
       color: goldenrod;
       display: block;
       min-width: 200px;
@@ -34,10 +66,11 @@ $month-margin: 10vw;
 
   .month__day-list {
     width: 100%;
-    height: 80%;
+    height: 100%;
+    margin-bottom: 10px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: 50px repeat(6, 1fr);
+    grid-template-rows: 30px repeat(6, 1fr);
     gap: 5px;
 
     .month__week-day {
@@ -48,7 +81,7 @@ $month-margin: 10vw;
       align-items: center;
 
       .month__week-day-name {
-        font-size: 30px;
+        font-size: 20px;
         color: goldenrod;
         opacity: 0.8;
       }
@@ -57,13 +90,22 @@ $month-margin: 10vw;
     .month__day {
       border: 1px solid goldenrod;
       border-radius: 10%;
-
       .month__day-number {
-        margin-left: 10px;
-        margin-top: 10px;
-        font-size: 30px;
+        width: 30px;
+        height: 30px;
+        margin: 0;
+        margin-left: 5px;
+        margin-top: 5px;
+        font-size: 20px;
+        line-height: 1.5;
+        text-align: center;
         color: goldenrod;
         opacity: 0.8;
+      }
+
+      .month__day-number_today {
+        border: 2px solid goldenrod;
+        border-radius: 50%;
       }
     }
   }

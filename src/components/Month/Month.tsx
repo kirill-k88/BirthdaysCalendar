@@ -14,7 +14,13 @@ export function Month({ setCurentDate }: { setCurentDate: any }) {
     } else {
       daysList.push(
         <div className="month__day" key={i}>
-          <p className="month__day-number">{i - curentDate.firstDayofWeek}</p>
+          <p
+            className={`month__day-number ${
+              i - curentDate.firstDayofWeek === curentDate.day ? 'month__day-number_today' : ''
+            }`}
+          >
+            {i - curentDate.firstDayofWeek}
+          </p>
         </div>
       );
     }
@@ -34,43 +40,47 @@ export function Month({ setCurentDate }: { setCurentDate: any }) {
 
   return (
     <section className="month">
-      <div className="month__header-container">
-        <button
-          className="month__changeMonthBtn common-button"
-          type="button"
-          onClick={handlerButtonbackword}
-        >{`<`}</button>
-        <h2 className="month__header">{curentDate.strMonth || ''}</h2>
-        <button
-          className="month__changeMonthBtn common-button"
-          type="button"
-          onClick={handlerButtonForward}
-        >{`>`}</button>
+      <div className="month__side-decoration month__side-decoration_left"></div>
+      <div className="month__day-list-container">
+        <div className="month__header-container">
+          <button
+            className="month__changeMonthBtn common-button"
+            type="button"
+            onClick={handlerButtonbackword}
+          >{`<`}</button>
+          <h2 className="month__header">{curentDate.strMonth || ''}</h2>
+          <button
+            className="month__changeMonthBtn common-button"
+            type="button"
+            onClick={handlerButtonForward}
+          >{`>`}</button>
+        </div>
+        <div className="month__day-list">
+          <div className="month__week-day">
+            <p className="month__week-day-name">Пн</p>
+          </div>
+          <div className="month__week-day">
+            <p className="month__week-day-name">Вт</p>
+          </div>
+          <div className="month__week-day">
+            <p className="month__week-day-name">Ср</p>
+          </div>
+          <div className="month__week-day">
+            <p className="month__week-day-name">Чт</p>
+          </div>
+          <div className="month__week-day">
+            <p className="month__week-day-name">Пт</p>
+          </div>
+          <div className="month__week-day">
+            <p className="month__week-day-name">Сб</p>
+          </div>
+          <div className="month__week-day">
+            <p className="month__week-day-name">Вс</p>
+          </div>
+          {daysList}
+        </div>
       </div>
-      <div className="month__day-list">
-        <div className="month__week-day">
-          <p className="month__week-day-name">Пн</p>
-        </div>
-        <div className="month__week-day">
-          <p className="month__week-day-name">Вт</p>
-        </div>
-        <div className="month__week-day">
-          <p className="month__week-day-name">Ср</p>
-        </div>
-        <div className="month__week-day">
-          <p className="month__week-day-name">Чт</p>
-        </div>
-        <div className="month__week-day">
-          <p className="month__week-day-name">Пт</p>
-        </div>
-        <div className="month__week-day">
-          <p className="month__week-day-name">Сб</p>
-        </div>
-        <div className="month__week-day">
-          <p className="month__week-day-name">Вс</p>
-        </div>
-        {daysList}
-      </div>
+      <div className="month__side-decoration month__side-decoration_rigth"></div>
     </section>
   );
 }
