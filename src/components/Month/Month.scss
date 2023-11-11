@@ -1,26 +1,70 @@
 $month-margin: 10vw;
 
 .month {
-  margin-top: calc($month-margin / 2);
-  width: calc(100vw - $month-margin);
+  width: calc(100%);
+  height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 10%;
-  border: 1px solid gray;
-  .month__header {
-    font-size: 40px;
+  border: 1px solid goldenrod;
+  background-image: url('../../images/Month/month-background.jpg');
+
+  .month__header-container {
+    display: flex;
+    align-items: center;
+
+    .month__header {
+      font-size: 40px;
+      color: goldenrod;
+      display: block;
+      min-width: 200px;
+      text-align: center;
+    }
+
+    .month__changeMonthBtn {
+      font-size: 40px;
+      color: goldenrod;
+      background-color: transparent;
+      border: none;
+      height: 50px;
+      align-items: center;
+      cursor: pointer;
+    }
   }
+
   .month__day-list {
     width: 100%;
+    height: 80%;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: 50px repeat(6, 1fr);
+    gap: 5px;
 
-    .div {
-      outline: 1px solid blue;
-      min-width: 200px;
-      min-height: 400px;
+    .month__week-day {
+      border: 1px solid rgba(218, 165, 32, 0.8);
+      border-radius: 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .month__week-day-name {
+        font-size: 30px;
+        color: goldenrod;
+        opacity: 0.8;
+      }
+    }
+
+    .month__day {
+      border: 1px solid goldenrod;
+      border-radius: 10%;
+
+      .month__day-number {
+        margin-left: 10px;
+        margin-top: 10px;
+        font-size: 30px;
+        color: goldenrod;
+        opacity: 0.8;
+      }
     }
   }
 }
