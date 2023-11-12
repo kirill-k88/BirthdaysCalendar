@@ -1,0 +1,48 @@
+/* Подключение шрифта LiteraTT */
+@font-face {
+  font-family: 'Literatt';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./LiterataTT-CaptionRegular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Literatt';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./LiterataTT-CaptionItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Literatt';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./LiterataTT-CaptionMedium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Literatt';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./LiterataTT-CaptionMediumItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Literatt';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('./LiterataTT-CaptionBold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Literatt';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url('./LiterataTT-CaptionBoldItalic.woff2') format('woff2');
+}

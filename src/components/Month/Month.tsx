@@ -8,6 +8,7 @@ import {
   getPreviousYearDate
 } from '../../utils/dateFunctions';
 import { CurrentDateContext } from '../../contexts/CurrentDateContext';
+import { BirthdaySign } from '../BirthdaySign/BirthdaySign';
 
 export function Month({ setCurentDate }: { setCurentDate: any }) {
   const { curentDate } = useContext(CurrentDateContext);
@@ -32,6 +33,10 @@ export function Month({ setCurentDate }: { setCurentDate: any }) {
           >
             {i - curentDate.firstDayofWeek}
           </p>
+          <BirthdaySign
+            photo={'https://ae01.alicdn.com/kf/HTB1H1r8XLBj_uVjSZFpq6A0SXXaZ.jpg'}
+            info={'Ваня Иванов, 23'}
+          />
         </div>
       );
     }

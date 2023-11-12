@@ -1,4 +1,5 @@
 @import url(../../vendor/normalize.scss);
+@import url(../../vendor/fonts/LiterataTT/literatatt.css);
 
 .app {
   display: flex;
@@ -6,4 +7,5 @@
   align-items: center;
   background-color: #f9f1f1;
   min-height: 100vh;
+  font-family: 'Literatt', sans-serif;
 }
