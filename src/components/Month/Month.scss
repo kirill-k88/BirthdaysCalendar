@@ -3,42 +3,42 @@ $month-margin: 10vw;
 .month {
   width: 100%;
   min-width: 860px;
-  height: calc(100vh - 100px);
+  //height: calc(100vh - 100px);
   display: flex;
   flex-direction: row;
-  align-items: center;
+  justify-content: space-between;
+  align-items: start;
   border: 1px solid goldenrod;
   background-image: url('../../images/Month/month-background.jpg');
+  background-size: cover;
 
   .month__side-decoration {
-    min-width: 150px;
-    height: 100%;
+    width: 100px;
     background-image: url('../../images/Month/month-side-decoration.png');
     background-repeat: repeat-y;
-    background-size: 70% 50%;
+    background-size: contain;
+    align-self: stretch;
+    background-position: top 5px;
   }
 
   .month__side-decoration_rigth {
-    margin-left: 8px;
-    border-left: 5px solid goldenrod;
-    background-position: 25px 5px;
+    margin-right: 8px;
   }
 
   .month__side-decoration_left {
-    margin-right: 8px;
-    border-right: 5px solid goldenrod;
-    background-position: 20px 5px;
+    margin-left: 8px;
   }
 
   .month__day-list-container {
-    width: calc(100% - 360px);
+    margin: 0 10px;
     padding: 0 25px;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-left: 2px solid goldenrod;
     border-right: 2px solid goldenrod;
+    border-left: 2px solid goldenrod;
   }
 
   .month__year-container {
@@ -89,6 +89,7 @@ $month-margin: 10vw;
       text-align: center;
       font-style: italic;
       font-weight: 400;
+      caret-color: transparent;
     }
 
     .month__changeMonthBtn {
@@ -136,14 +137,17 @@ $month-margin: 10vw;
     }
 
     .month__day {
+      position: relative;
       border: 1px solid goldenrod;
       border-radius: 10%;
+      display: flex;
+
       .month__day-number {
         width: 30px;
         height: 30px;
         margin: 0;
-        margin-left: 5px;
-        margin-top: 5px;
+        margin-left: 2px;
+        margin-top: 2px;
         font-size: 20px;
         line-height: 1.5;
         text-align: center;
@@ -154,6 +158,16 @@ $month-margin: 10vw;
       .month__day-number_today {
         border: 2px solid goldenrod;
         border-radius: 50%;
+      }
+
+      .month__day-birthday-container {
+        width: calc(100% - 34px);
+        height: calc(100% - 8px);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 1px;
+        margin-top: 4px;
       }
     }
   }

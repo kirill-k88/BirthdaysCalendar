@@ -9,8 +9,55 @@
 </head>
 
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
+</body>
+<button id="btn">Get token</button>
+<button id="btnGetSmth">Get something</button>
+<script>
+
+  function getOAuthToken() {
+    var client_id = 'aaaadb6d98f443f7a96c4970071773d3';
+    var redirect_url = 'REDIRECT_URL';
+    var scope = 'email';
+
+    var oauth_url = "https://oauth.yandex.ru/authorize?" +
+      'response_type=token' +
+      '&client_id=' + encodeURIComponent(client_id);
+
+    // Open popup window with authorization url
+    console.log(oauth_url);
+    window.open(oauth_url);
+  }
+
+  document.getElementById('btn').addEventListener('click', getOAuthToken);
+
+  function getInfo(token) {
+    console.log('token', token);
+    fetch(`https://login.yandex.ru/info`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data); // выведет информацию о пользователе
+      })
+      .catch(err => console.error(err));
+  }
+
+  function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp(name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+
+
+  document.getElementById('btnGetSmth').addEventListener('click', () => { getInfo(getParameterByName('#access_token')) });
+</script>
 </body>
 
 </html>

@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import './Month.scss';
-import '../../utils/common-button.scss';
 import {
   getNextMonthDate,
   getPreviousMonthDate,
@@ -33,10 +32,36 @@ export function Month({ setCurentDate }: { setCurentDate: any }) {
           >
             {i - curentDate.firstDayofWeek}
           </p>
-          <BirthdaySign
-            photo={'https://ae01.alicdn.com/kf/HTB1H1r8XLBj_uVjSZFpq6A0SXXaZ.jpg'}
-            info={'Ваня Иванов, 23'}
-          />
+          <div className="month__day-birthday-container">
+            <BirthdaySign
+              photo={'https://i.pinimg.com/originals/17/92/06/179206d058b1ed5877d221d6e84f2b38.jpg'}
+              info={'Маша.К'}
+            />
+            <BirthdaySign
+              photo={'https://i.pinimg.com/originals/17/92/06/179206d058b1ed5877d221d6e84f2b38.jpg'}
+              info={'Ваня.И'}
+            />
+            <BirthdaySign
+              photo={'https://i.pinimg.com/originals/17/92/06/179206d058b1ed5877d221d6e84f2b38.jpg'}
+              info={'Галя.Р'}
+            />
+            <BirthdaySign
+              photo={'https://i.pinimg.com/originals/17/92/06/179206d058b1ed5877d221d6e84f2b38.jpg'}
+              info={'Галя.Р'}
+            />
+            <BirthdaySign
+              photo={'https://i.pinimg.com/originals/17/92/06/179206d058b1ed5877d221d6e84f2b38.jpg'}
+              info={'Галя.Р'}
+            />
+            <BirthdaySign
+              photo={'https://i.pinimg.com/originals/17/92/06/179206d058b1ed5877d221d6e84f2b38.jpg'}
+              info={'Галя.Р'}
+            />
+            <BirthdaySign
+              photo={'https://i.pinimg.com/originals/17/92/06/179206d058b1ed5877d221d6e84f2b38.jpg'}
+              info={'Галя.Р'}
+            />
+          </div>
         </div>
       );
     }
@@ -72,7 +97,7 @@ export function Month({ setCurentDate }: { setCurentDate: any }) {
             type="button"
             onClick={handlerButtonYearBackword}
           >{`<`}</button>
-          <h2 className="month__year">{curentDate.year || ''}</h2>
+          <h2 className="month__year noselect">{curentDate.year || ''}</h2>
           <button
             className="month__changeYearBtn common-button"
             type="button"
@@ -85,7 +110,7 @@ export function Month({ setCurentDate }: { setCurentDate: any }) {
             type="button"
             onClick={handlerButtonMonthBackword}
           >{`<`}</button>
-          <h2 className="month__header">{curentDate.strMonth || ''}</h2>
+          <h2 className="month__header noselect">{curentDate.strMonth || ''}</h2>
           <button
             className="month__changeMonthBtn common-button"
             type="button"
