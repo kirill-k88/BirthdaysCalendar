@@ -156,7 +156,7 @@
         width: calc(100% - 50px);
         height: calc(100% - 8px);
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
         grid-template-rows: 1fr;
         gap: 5px;
         margin-top: 4px;
