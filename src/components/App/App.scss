@@ -1,12 +1,8 @@
-@import url(../../vendor/normalize.scss);
-@import url(../../vendor/fonts/LiterataTT/literatatt.css);
-@import url(../../utils/noselect.scss);
-@import url(../../utils/common-button.scss);
-
 .app {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   background-color: #f9f1f1;
   min-height: 100vh;
   font-family: 'Literatt', sans-serif;
