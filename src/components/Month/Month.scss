@@ -153,12 +153,14 @@
       }
 
       .month__day-birthday-container {
-        width: calc(100% - 34px);
+        width: calc(100% - 50px);
         height: calc(100% - 8px);
         display: grid;
-        grid-template-columns: repeat(auto-fit, 100px);
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        grid-template-rows: 1fr;
         gap: 5px;
         margin-top: 4px;
+        margin-right: 4px;
         justify-content: space-around;
       }
     }

@@ -10,7 +10,6 @@
 
   .birthday-sign__photo {
     width: 100%;
-    height: 60%;
     border-radius: 15%;
   }
 
@@ -18,21 +17,9 @@
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: center;
     color: goldenrod;
-    font-size: 10px;
+    font-size: 15px;
     margin: 0;
   }
-
-  /*   &::after {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 60px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('../../images/BirthdaySign/birthday-frame.png');
-  } */
 }
