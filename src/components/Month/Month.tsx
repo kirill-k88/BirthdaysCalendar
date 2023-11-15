@@ -31,7 +31,16 @@ export function Month({ setCurentDate }: { setCurentDate: any }) {
                 : ''
             }`}
             key={i}>
-            <p className="month__day-number">{i - curentDate.firstDayofWeek}</p>
+            <p
+              className={`month__day-number ${
+                i - curentDate.firstDayofWeek === curentDate.day &&
+                curentDate.year === nowDate.getFullYear() &&
+                curentDate.month === nowDate.getMonth() + 1
+                  ? 'month__day-number_today'
+                  : ''
+              }`}>
+              {i - curentDate.firstDayofWeek}
+            </p>
             <div className="month__day-birthday-container">
               <BirthdaySign
                 photo={

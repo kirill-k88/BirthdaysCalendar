@@ -152,6 +152,10 @@
         color: goldenrod;
       }
 
+      .month__day-number_today {
+        color: red;
+      }
+
       .month__day-birthday-container {
         width: calc(100% - 50px);
         height: calc(100% - 8px);
