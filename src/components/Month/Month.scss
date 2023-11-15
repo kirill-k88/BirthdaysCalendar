@@ -116,21 +116,19 @@
     font-weight: 400;
 
     .month__week-day {
-      //border-right: 1px solid goldenrod;
-      border-radius: 30px;
+      border-right: 1px solid goldenrod;
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 0 30px rgba(218, 165, 32, 0.8);
+      background: transparent;
 
       .month__week-day-name {
         font-size: 20px;
         color: goldenrod;
-        opacity: 0.8;
       }
 
       &:first-child {
-        //border-left: 1px solid goldenrod;
+        border-left: 1px solid goldenrod;
       }
     }
 
@@ -165,8 +163,8 @@
       }
     }
     .month__day_today {
-      border: 3px solid red;
-      box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+      border: 1px solid red;
+      box-shadow: 0 0 30px red;
     }
   }
 }
