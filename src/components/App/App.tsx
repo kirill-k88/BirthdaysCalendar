@@ -44,6 +44,18 @@ export function App() {
           console.log('Ошибка запроса: ' + err);
           localStorage.setItem('oauthToken', '');
         });
+
+      fetch('https://calendar.yandex.com/api/v2/events/', {
+        method: 'GET',
+        mode: 'no-cors',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+        });
     } else {
       //пробуем получить токен по новой
       window.location.href = getOAuthTokenLink(window.location.pathname);

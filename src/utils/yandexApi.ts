@@ -6,14 +6,12 @@ import {
 } from './constants';
 
 export function getOAuthTokenLink(redirect_url = window.location.pathname): string {
-  const client_id = YANDEX_OAUTH_ID;
-
   return (
     YANDEX_GET_TOKEN_LINK +
     '?' +
     'response_type=token' +
     '&client_id=' +
-    encodeURIComponent(client_id) +
+    encodeURIComponent(YANDEX_OAUTH_ID) +
     '&redirect_url=' +
     encodeURIComponent(redirect_url)
   );
