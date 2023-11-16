@@ -1,14 +1,16 @@
-import React from 'react';
 import './Header.scss';
 
-export function Header({ yandexToken }: { yandexToken: string }) {
+export function Header({
+  isAuthtorized,
+  handleAuthBtn
+}: {
+  isAuthtorized: boolean;
+  handleAuthBtn: any;
+}) {
   return (
     <header className="header">
-      {!yandexToken && (
-        <button
-          className="header__btn-yandex common-button"
-          /* onClick={handelbtnYandexClick} */
-        ></button>
+      {!isAuthtorized && (
+        <button className="header__auth-btn common-button" onClick={handleAuthBtn}></button>
       )}
     </header>
   );

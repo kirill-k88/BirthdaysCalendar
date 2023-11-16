@@ -1,71 +1,37 @@
-import React, { useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import './App.scss';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { Month } from '../Month/Month';
-import { createNewDate } from '../../utils/dateFunctions';
+import { createNewDate, getEndOfYear, getStartOfYear } from '../../utils/dateFunctions';
 import { CurrentDateContext } from '../../contexts/CurrentDateContext';
 import { dateType } from '../../utils/dateType';
-import { getParameterByName } from '../../utils/urlFunctions';
-import { getYandexUserInfo, getOAuthTokenLink } from '../../utils/yandexApi';
+import { authorize, createGapi, listOfEvents } from '../../utils/googleApi';
 
 export function App() {
   const myDate: dateType = createNewDate(new Date());
   const [curentDate, setCurentDate] = useState(myDate);
   const [userData, setUserData] = useState({});
-  const [yandexToken, setYandexToken] = useState('');
-
-  function handelbtnYandexClick(): void {
-    //переход на страницу Oauth Яндекса,для получения токена
-    window.location.href = getOAuthTokenLink(window.location.pathname);
-  }
+  const [isAuthtorized, setIsAuthtorized] = useState(false);
 
   useLayoutEffect(() => {
-    //после перенаправления со страницы получения Яндекс oauth-токена необходимо его получить из параметров url
-    let token = '';
-    if (getParameterByName('#access_token')) {
-      token = getParameterByName('#access_token');
-      localStorage.setItem('oauthToken', token);
-    } else {
-      if (localStorage.getItem('oauthToken')) {
-        token = localStorage.getItem('oauthToken') || '';
-      }
-    }
-
-    if (token) {
-      setYandexToken(token);
-      //получаем данные пользователя
-      getYandexUserInfo(token)
-        .then(data => {
-          setUserData(data);
-          console.log(data);
-        })
-        .catch(err => {
-          console.log('Ошибка запроса: ' + err);
-          localStorage.setItem('oauthToken', '');
-        });
-
-      fetch('https://calendar.yandex.com/api/v2/events/', {
-        method: 'GET',
-        mode: 'no-cors',
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-        });
-    } else {
-      //пробуем получить токен по новой
-      window.location.href = getOAuthTokenLink(window.location.pathname);
-    }
+    createGapi();
   }, []);
+
+  useLayoutEffect(() => {
+    if (isAuthtorized) {
+      listOfEvents(getStartOfYear(myDate.date), getEndOfYear(myDate.date));
+    }
+  }, [isAuthtorized]);
+
+  function handleAuthBtn() {
+    authorize(setIsAuthtorized);
+  }
 
   return (
     <CurrentDateContext.Provider value={{ curentDate }}>
       <div className="app">
-        <Header yandexToken={yandexToken} />
+        <Header handleAuthBtn={handleAuthBtn} isAuthtorized={isAuthtorized} />
         <Month setCurentDate={setCurentDate} />
         <Footer />
       </div>

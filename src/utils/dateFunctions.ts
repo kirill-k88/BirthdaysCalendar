@@ -1,5 +1,13 @@
 import { dateType } from './dateType';
-import { addMonths, getDaysInMonth, startOfMonth, getDay, addYears } from 'date-fns';
+import {
+  addMonths,
+  getDaysInMonth,
+  startOfMonth,
+  getDay,
+  addYears,
+  startOfYear,
+  endOfYear
+} from 'date-fns';
 import { MONTH_LIST } from './constants';
 
 export function getNextMonthDate(date: Date): dateType {
@@ -28,4 +36,12 @@ export function createNewDate(date: Date): dateType {
     day: date.getDate(),
     firstDayofWeek: getDay(startOfMonth(date)) === 0 ? 6 : getDay(startOfMonth(date)) - 1
   };
+}
+
+export function getStartOfYear(date: Date): Date {
+  return startOfYear(date);
+}
+
+export function getEndOfYear(date: Date): Date {
+  return endOfYear(date);
 }
