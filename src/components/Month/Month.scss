@@ -131,46 +131,5 @@
         border-left: 1px solid goldenrod;
       }
     }
-
-    .month__day {
-      position: relative;
-      border: 1px solid goldenrod;
-      border-radius: 4%;
-      display: flex;
-      justify-content: space-between;
-      gap: 5px;
-
-      .month__day-number {
-        width: 30px;
-        height: 30px;
-        margin: 0;
-        margin-left: 2px;
-        margin-top: 2px;
-        font-size: 20px;
-        line-height: 1.5;
-        text-align: center;
-        color: goldenrod;
-      }
-
-      .month__day-number_today {
-        color: red;
-      }
-
-      .month__day-birthday-container {
-        width: calc(100% - 50px);
-        height: calc(100% - 8px);
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-        grid-template-rows: 1fr;
-        gap: 5px;
-        margin-top: 4px;
-        margin-right: 4px;
-        justify-content: space-around;
-      }
-    }
-    .month__day_today {
-      border: 1px solid red;
-      box-shadow: 0 0 30px red;
-    }
   }
 }

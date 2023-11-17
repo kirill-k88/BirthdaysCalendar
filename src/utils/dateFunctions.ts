@@ -1,4 +1,4 @@
-import { dateType } from './dateType';
+import { myDateType } from './dateType';
 import {
   addMonths,
   getDaysInMonth,
@@ -10,23 +10,23 @@ import {
 } from 'date-fns';
 import { MONTH_LIST } from './constants';
 
-export function getNextMonthDate(date: Date): dateType {
+export function getNextMonthDate(date: Date): myDateType {
   return createNewDate(addMonths(date, 1));
 }
 
-export function getPreviousMonthDate(date: Date): dateType {
+export function getPreviousMonthDate(date: Date): myDateType {
   return createNewDate(addMonths(date, -1));
 }
 
-export function getNextYearDate(date: Date): dateType {
+export function getNextYearDate(date: Date): myDateType {
   return createNewDate(addYears(date, 1));
 }
 
-export function getPreviousYearDate(date: Date): dateType {
+export function getPreviousYearDate(date: Date): myDateType {
   return createNewDate(addYears(date, -1));
 }
 
-export function createNewDate(date: Date): dateType {
+export function createNewDate(date: Date): myDateType {
   return {
     date,
     year: date.getFullYear(),
@@ -34,7 +34,7 @@ export function createNewDate(date: Date): dateType {
     strMonth: MONTH_LIST[date.getMonth()] || '',
     days: getDaysInMonth(date),
     day: date.getDate(),
-    firstDayofWeek: getDay(startOfMonth(date)) === 0 ? 6 : getDay(startOfMonth(date)) - 1
+    firstDayofMonth: getDay(startOfMonth(date)) === 0 ? 6 : getDay(startOfMonth(date)) - 1
   };
 }
 
@@ -44,4 +44,10 @@ export function getStartOfYear(date: Date): Date {
 
 export function getEndOfYear(date: Date): Date {
   return endOfYear(date);
+}
+
+export function convertMyDateToStr(date: myDateType): string {
+  return `${date.year}-${date.month < 10 ? '0' + date.month : date.month}-${
+    date.day < 10 ? '0' + date.day : date.day
+  }`;
 }

@@ -1,5 +1,5 @@
-import React, { useContext, useLayoutEffect } from 'react';
 import './Month.scss';
+import { useContext, useLayoutEffect } from 'react';
 import {
   getNextMonthDate,
   getPreviousMonthDate,
@@ -7,8 +7,8 @@ import {
   getPreviousYearDate
 } from '../../utils/dateFunctions';
 import { CurrentDateContext } from '../../contexts/CurrentDateContext';
-import { BirthdaySign } from '../BirthdaySign/BirthdaySign';
 import { WEEKDAY_LIST } from '../../utils/constants';
+import { Day } from '../Day/Day';
 
 export function Month({
   setCurentDate,
@@ -21,55 +21,18 @@ export function Month({
 }) {
   const { curentDate } = useContext(CurrentDateContext);
 
-  const nowDate = new Date();
-
   function getDayElementList(): JSX.Element[] {
     const daysList: JSX.Element[] = [];
-    for (let i = 1; i <= curentDate.days + curentDate.firstDayofWeek; i++) {
-      if (i < curentDate.firstDayofWeek + 1) {
+
+    for (let i = 1; i <= curentDate.days + curentDate.firstDayofMonth; i++) {
+      if (i < curentDate.firstDayofMonth + 1) {
         daysList.push(<div key={i}></div>);
       } else {
         daysList.push(
-          <div
-            className={`month__day ${
-              i - curentDate.firstDayofWeek === curentDate.day &&
-              curentDate.year === nowDate.getFullYear() &&
-              curentDate.month === nowDate.getMonth() + 1
-                ? 'month__day_today'
-                : ''
-            }`}
-            key={i}>
-            <p
-              className={`month__day-number ${
-                i - curentDate.firstDayofWeek === curentDate.day &&
-                curentDate.year === nowDate.getFullYear() &&
-                curentDate.month === nowDate.getMonth() + 1
-                  ? 'month__day-number_today'
-                  : ''
-              }`}>
-              {i - curentDate.firstDayofWeek}
-            </p>
-            <div className="month__day-birthday-container">
-              <BirthdaySign
-                photo={
-                  'https://i.pinimg.com/originals/17/92/06/179206d058b1ed5877d221d6e84f2b38.jpg'
-                }
-                info={'Маша.К'}
-              />
-              {/*               <BirthdaySign
-                photo={
-                  'https://i.pinimg.com/originals/17/92/06/179206d058b1ed5877d221d6e84f2b38.jpg'
-                }
-                info={'Ваня.И'}
-              /> */}
-              <BirthdaySign
-                photo={
-                  'https://i.pinimg.com/originals/17/92/06/179206d058b1ed5877d221d6e84f2b38.jpg'
-                }
-                info={'Галя.Р'}
-              />
-            </div>
-          </div>
+          <Day
+            key={i}
+            eventList={eventList}
+            thisDayNumber={i - curentDate.firstDayofMonth}></Day>
         );
       }
     }
@@ -110,6 +73,7 @@ export function Month({
   };
 
   useLayoutEffect(() => {
+    //Получить события календаря и расставить их в текущем месяце
     if (isAuthtorized && !!eventList.length) {
       console.log('eventList ==> ', eventList);
     }

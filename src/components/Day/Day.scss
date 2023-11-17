@@ -1,0 +1,40 @@
+.day {
+  position: relative;
+  border: 1px solid goldenrod;
+  border-radius: 4%;
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+
+  .day__number {
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    margin-left: 2px;
+    margin-top: 2px;
+    font-size: 20px;
+    line-height: 1.5;
+    text-align: center;
+    color: goldenrod;
+  }
+
+  .day__numberr_today {
+    color: red;
+  }
+
+  .day__birthday-container {
+    width: calc(100% - 50px);
+    height: calc(100% - 8px);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    grid-template-rows: 1fr;
+    gap: 5px;
+    margin-top: 4px;
+    margin-right: 4px;
+    justify-content: space-around;
+  }
+}
+.day_today {
+  border: 1px solid red;
+  box-shadow: 0 0 30px red;
+}
