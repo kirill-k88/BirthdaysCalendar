@@ -19,7 +19,7 @@ export function Day({ eventList, thisDayNumber }: { eventList: object[]; thisDay
         eventList.filter((e: any) => e.start.date === thisDayStr && e.summary.indexOf('ДР') === 0)
       );
     }
-  }, [eventList]);
+  }, [eventList, curentDate]);
 
   function isToday(): boolean {
     return thisDayNumber === curentDate.day &&
