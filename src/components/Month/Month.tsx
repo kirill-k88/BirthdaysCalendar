@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useLayoutEffect } from 'react';
 import './Month.scss';
 import {
   getNextMonthDate,
@@ -10,7 +10,15 @@ import { CurrentDateContext } from '../../contexts/CurrentDateContext';
 import { BirthdaySign } from '../BirthdaySign/BirthdaySign';
 import { WEEKDAY_LIST } from '../../utils/constants';
 
-export function Month({ setCurentDate }: { setCurentDate: any }) {
+export function Month({
+  setCurentDate,
+  eventList,
+  isAuthtorized
+}: {
+  setCurentDate: any;
+  eventList: object[];
+  isAuthtorized: boolean;
+}) {
   const { curentDate } = useContext(CurrentDateContext);
 
   const nowDate = new Date();
@@ -100,6 +108,12 @@ export function Month({ setCurentDate }: { setCurentDate: any }) {
   const handlerButtonYearBackword = () => {
     setCurentDate(getPreviousYearDate(curentDate.date));
   };
+
+  useLayoutEffect(() => {
+    if (isAuthtorized && !!eventList.length) {
+      console.log('eventList ==> ', eventList);
+    }
+  }, [eventList, isAuthtorized]);
 
   return (
     <section className="month">

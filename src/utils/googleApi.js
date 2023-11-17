@@ -59,7 +59,8 @@ export function authorize(setIsAuthtorized) {
   }
 }
 
-export async function listOfEvents(startOfYear, endOfYear) {
+//Получаем все события из календаря за переданных период
+export function getLEventList(startOfYear, endOfYear, setEventList) {
   const calendarRequestParams = {
     calendarId: 'primary',
     timeMin: startOfYear.toISOString(),
@@ -69,12 +70,12 @@ export async function listOfEvents(startOfYear, endOfYear) {
     maxResults: 10,
     orderBy: 'startTime'
   };
+
   window.gapi.client.load('calendar', 'v3', () => {
     window.gapi.client.calendar.events
       .list({ ...calendarRequestParams })
       .then(function (response) {
-        let events = response.result.items;
-        console.log(events);
+        setEventList(response.result.items);
       })
       .catch(err => {
         console.log(err);
