@@ -5,10 +5,14 @@
   display: flex;
   justify-content: space-between;
   gap: 5px;
+  min-height: 80px;
+
+  @media screen and (max-width: 600px) {
+    min-height: 30px;
+  }
 
   .day__number {
     width: 30px;
-    height: 30px;
     margin: 0;
     margin-left: 2px;
     margin-top: 2px;
@@ -16,22 +20,49 @@
     line-height: 1.5;
     text-align: center;
     color: goldenrod;
+
+    @media screen and (max-width: 900px) {
+      width: 15px;
+      font-size: 15px;
+    }
+
+    @media screen and (max-width: 600px) {
+      width: 8px;
+      font-size: 8px;
+    }
+
+    @media screen and (max-width: 400px) {
+      width: 6px;
+      font-size: 6px;
+    }
   }
 
-  .day__numberr_today {
+  .day__number_today {
     color: red;
   }
 
   .day__birthday-container {
-    width: calc(100% - 50px);
-    height: calc(100% - 8px);
+    width: calc(100% - 40px);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-    grid-template-rows: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+    //grid-template-rows: minmax(60px, 70px);
     gap: 5px;
     margin-top: 4px;
     margin-right: 4px;
     justify-content: space-around;
+
+    @media screen and (max-width: 1200px) {
+      grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+    }
+
+    @media screen and (max-width: 900px) {
+      grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+      width: calc(100% - 20px);
+    }
+
+    @media screen and (max-width: 600px) {
+      width: calc(100% - 10px);
+    }
   }
 }
 .day_today {

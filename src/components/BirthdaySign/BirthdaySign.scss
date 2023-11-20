@@ -21,5 +21,13 @@
     color: goldenrod;
     font-size: 15px;
     margin: 0;
+
+    @media screen and (max-width: 1200px) {
+      font-size: 10px;
+    }
+
+    @media screen and (max-width: 600px) {
+      font-size: 6px;
+    }
   }
 }

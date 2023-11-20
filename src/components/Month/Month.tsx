@@ -48,7 +48,12 @@ export function Month({
         <div
           className="month__week-day"
           key={index}>
-          <p className="month__week-day-name">{day}</p>
+          <p
+            className={`month__week-day-name ${
+              index === 5 || index === 6 ? 'month__week-day-name_hollyday' : ''
+            }`}>
+            {day}
+          </p>
         </div>
       );
     });

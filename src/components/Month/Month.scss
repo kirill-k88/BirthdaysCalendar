@@ -1,6 +1,5 @@
 .month {
   width: 100%;
-  min-width: 860px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -11,12 +10,28 @@
   background-size: cover;
 
   .month__side-decoration {
-    width: 100px;
+    min-width: 100px;
     background-image: url('../../images/Month/month-side-decoration.png');
     background-repeat: repeat-y;
     background-size: contain;
     align-self: stretch;
     background-position: top 5px;
+
+    @media screen and (max-width: 1200px) {
+      min-width: 80px;
+    }
+
+    @media screen and (max-width: 900px) {
+      min-width: 60px;
+    }
+
+    @media screen and (max-width: 600px) {
+      min-width: 30px;
+    }
+
+    @media screen and (max-width: 420px) {
+      min-width: 20px;
+    }
   }
 
   .month__side-decoration_rigth {
@@ -37,6 +52,11 @@
     align-items: center;
     border-right: 2px solid goldenrod;
     border-left: 2px solid goldenrod;
+
+    @media screen and (max-width: 600px) {
+      padding: 0 5px;
+      margin: 0 5px;
+    }
   }
 
   .month__year-container {
@@ -45,16 +65,18 @@
     margin-top: 10px;
 
     .month__year {
-      margin: 0;
+      margin: 0 5px;
       font-size: 15px;
       line-height: 1;
-      height: 15px;
       color: goldenrod;
       display: block;
-      min-width: 50px;
       text-align: center;
       font-style: italic;
       font-weight: 500;
+
+      @media screen and (max-width: 600px) {
+        font-size: 10px;
+      }
     }
 
     .month__changeYearBtn {
@@ -68,6 +90,10 @@
       font-style: italic;
       font-weight: 500;
       padding: 0;
+
+      @media screen and (max-width: 600px) {
+        font-size: 10px;
+      }
     }
   }
 
@@ -80,7 +106,6 @@
       margin: 0;
       font-size: 40px;
       line-height: 1;
-      height: 40px;
       color: goldenrod;
       display: block;
       min-width: 200px;
@@ -88,43 +113,90 @@
       font-style: italic;
       font-weight: 400;
       caret-color: transparent;
+
+      @media screen and (max-width: 900px) {
+        font-size: 25px;
+        min-width: 120px;
+      }
+
+      @media screen and (max-width: 600px) {
+        font-size: 20px;
+        min-width: 100px;
+      }
     }
 
     .month__changeMonthBtn {
       font-size: 40px;
+      line-height: 1;
       color: goldenrod;
       background-color: transparent;
       border: none;
-      height: 50px;
       align-items: center;
       cursor: pointer;
       font-style: italic;
       font-weight: 400;
       padding: 0;
+
+      @media screen and (max-width: 900px) {
+        font-size: 25px;
+      }
+
+      @media screen and (max-width: 600px) {
+        font-size: 20px;
+      }
     }
   }
 
   .month__day-list {
     width: 100%;
-    height: 100%;
     margin-bottom: 10px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: 30px repeat(6, 1fr);
+    grid-template-rows: 30px repeat(6, minmax(1fr, 100px));
+    min-height: 0;
     gap: 15px;
     font-style: italic;
     font-weight: 400;
 
+    @media screen and (max-width: 900px) {
+      gap: 10px;
+    }
+
+    @media screen and (max-width: 400px) {
+      gap: 5px;
+    }
+
     .month__week-day {
       border-right: 1px solid goldenrod;
+      height: 30px;
       display: flex;
       justify-content: center;
       align-items: center;
       background: transparent;
+      margin-bottom: 10px;
+
+      @media screen and (max-width: 600px) {
+        height: 20px;
+      }
 
       .month__week-day-name {
         font-size: 20px;
+        line-height: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
         color: goldenrod;
+
+        @media screen and (max-width: 900px) {
+          font-size: 15px;
+        }
+
+        @media screen and (max-width: 600px) {
+          font-size: 10px;
+        }
+      }
+
+      .month__week-day-name_hollyday {
+        color: red;
       }
 
       &:first-child {
