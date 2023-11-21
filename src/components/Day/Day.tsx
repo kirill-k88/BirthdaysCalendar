@@ -5,7 +5,15 @@ import { BirthdaySign } from '../BirthdaySign/BirthdaySign';
 import { useContext } from 'react';
 import { convertMyDateToStr, createNewDate } from '../../utils/dateFunctions';
 
-export function Day({ eventList, thisDayNumber }: { eventList: object[]; thisDayNumber: number }) {
+export function Day({
+  eventList,
+  thisDayNumber,
+  setIsAddPopupVisible
+}: {
+  eventList: object[];
+  thisDayNumber: number;
+  setIsAddPopupVisible: any;
+}) {
   const [birthdayList, setBirthdayList] = useState<any[]>([]);
   const { curentDate } = useContext(CurrentDateContext);
 
@@ -29,8 +37,13 @@ export function Day({ eventList, thisDayNumber }: { eventList: object[]; thisDay
       : false;
   }
 
+  function handleClick() {
+    setIsAddPopupVisible(true);
+  }
+
   return (
     <div
+      onClick={handleClick}
       className={`day ${isToday() && 'day_today'}`}
       key={new Date().getTime()}>
       <p className={`day__number ${isToday() && 'day__number_today'}`}>{thisDayNumber}</p>

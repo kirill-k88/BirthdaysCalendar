@@ -7,12 +7,14 @@ import { createNewDate, getEndOfYear, getStartOfYear } from '../../utils/dateFun
 import { CurrentDateContext } from '../../contexts/CurrentDateContext';
 import { myDateType } from '../../utils/dateType';
 import { authorize, createGapi, getLEventList } from '../../utils/googleApi';
+import { AddBirthdayPopupForm } from '../AddBirthdayPopupForm/AddBirthdayPopupForm';
 
 export function App() {
   const myDate: myDateType = createNewDate(new Date());
   const [curentDate, setCurentDate] = useState(myDate);
   const [eventList, setEventList] = useState<any>([]);
   const [isAuthtorized, setIsAuthtorized] = useState(false);
+  const [isAddPopupVisible, setIsAddPopupVisible] = useState(false);
 
   useLayoutEffect(() => {
     createGapi();
@@ -39,7 +41,9 @@ export function App() {
           setCurentDate={setCurentDate}
           eventList={eventList}
           isAuthtorized={isAuthtorized}
+          setIsAddPopupVisible={setIsAddPopupVisible}
         />
+        {isAddPopupVisible && <AddBirthdayPopupForm setIsAddPopupVisible={setIsAddPopupVisible} />}
         <Footer />
       </div>
     </CurrentDateContext.Provider>

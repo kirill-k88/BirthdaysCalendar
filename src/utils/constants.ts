@@ -22,16 +22,14 @@ export const GAPI_SCRIPT_URL = 'https://apis.google.com/js/client.js';
 export const GSI_SCRIPT_URL = 'https://accounts.google.com/gsi/client';
 
 export const ERROR_FIELD_IS_REQUIRED = 'Поле обязательно для заполнения';
-
 export const NAME_MIN_LENGTH = 2;
 export const ERROR_NAME_FIELD_MIN_LENGTH = `Минимальная количество символов ${NAME_MIN_LENGTH}`;
 export const NAME_MAX_LENGTH = 15;
 export const ERROR_NAME_FIELD_MAX_LENGTH = `Максимальная количество символов ${NAME_MAX_LENGTH}`;
 export const NAME_REGEXP = new RegExp('[А-Яа-яёЁ.]+');
 export const ERROR_NAME_FIELD_VALIDATION = 'Допускаются только крилические буквы и точка';
-export const URL_REGEXP = new RegExp(
-  '^((http(s)?://)?[w.-]+(.[w.-]+)+([w.,@?^=%&:/~+#-]*[w@?^=%&/~+#-])?)+$'
-);
+export const URL_REGEXP =
+  /https?:\/\/(www.)?[-a-zA-Z0-9@:%._~#=]{1,256}.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)/i;
 export const ERROR_URL_FIELD_VALIDATION = 'Неправильно указана ссылка на фото';
-export const DATE_REGEXP = new RegExp(`^[\d]{1,2}.[\d]{1,2}.[\d]{4}$`);
+export const DATE_REGEXP = new RegExp(`^[0-9]{2,}.[0-9]{2,}.[0-9]{4}$`);
 export const ERROR_DATE_FIELD_VALIDATION = 'Неправильно задана дата рождения';

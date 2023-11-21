@@ -13,11 +13,13 @@ import { Day } from '../Day/Day';
 export function Month({
   setCurentDate,
   eventList,
-  isAuthtorized
+  isAuthtorized,
+  setIsAddPopupVisible
 }: {
   setCurentDate: any;
   eventList: object[];
   isAuthtorized: boolean;
+  setIsAddPopupVisible: any;
 }) {
   const { curentDate } = useContext(CurrentDateContext);
 
@@ -32,7 +34,8 @@ export function Month({
           <Day
             key={i}
             eventList={eventList}
-            thisDayNumber={i - curentDate.firstDayofMonth}></Day>
+            thisDayNumber={i - curentDate.firstDayofMonth}
+            setIsAddPopupVisible={setIsAddPopupVisible}></Day>
         );
       }
     }

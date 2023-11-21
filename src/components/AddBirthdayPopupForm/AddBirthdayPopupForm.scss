@@ -1,0 +1,102 @@
+.addBirthday-popup__background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  .addBirthday-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 15px;
+    background-color: black;
+    border: 2px solid red;
+    border-radius: 20px;
+    box-shadow: 0 0 30px red;
+
+    .addBirthday-popup__close-btn {
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      background-color: transparent;
+      color: red;
+      border: none;
+      padding: 0;
+      margin: 0;
+      font-size: 30px;
+      font-weight: 400;
+      line-height: 1;
+      opacity: 0.8;
+    }
+
+    .addBirthday-popup__form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+
+      .addBirthday-popup__field-text {
+        color: goldenrod;
+        padding: 0;
+        margin: 0;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 1;
+        margin-bottom: 5px;
+        margin-left: 5px;
+        margin-top: 10px;
+
+        &:first-child {
+          margin-top: 0px;
+        }
+      }
+
+      .addBirthday-popup__field {
+        width: 250px;
+        padding: 3px;
+        margin: 0;
+        margin-bottom: 2px;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 1;
+        color: goldenrod;
+        background-color: transparent;
+        border: 1px solid goldenrod;
+        border-radius: 5px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      .addBirthday-popup__field-error {
+        width: 250px;
+        padding: 0;
+        margin: 0;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1;
+        color: red;
+      }
+
+      .addBirthday-popup__submit-btn {
+        margin-top: 20px;
+        padding: 5px 10px;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: center;
+        vertical-align: middle;
+        color: goldenrod;
+        background-color: transparent;
+        border-radius: 5px;
+        border: 1px solid goldenrod;
+      }
+
+      .addBirthday-popup__submit-btn_diabled {
+        opacity: 0.5;
+      }
+    }
+  }
+}
