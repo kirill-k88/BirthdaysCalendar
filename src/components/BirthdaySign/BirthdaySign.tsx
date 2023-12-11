@@ -10,8 +10,6 @@ export function BirthdaySign({
   setCurrentEvent: Dispatch<SetStateAction<IEvent>>;
 }) {
   const handleClick = () => {
-    console.log(event);
-
     setCurrentEvent(event);
   };
 
