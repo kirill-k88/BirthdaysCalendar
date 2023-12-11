@@ -1,9 +1,7 @@
 import './AddBirthdayPopupForm.scss';
-import { SubmitHandler, useForm, FieldValues } from 'react-hook-form';
-import { IBirthday } from './AddBirthdayPopupForm.interface';
+import { useForm, FieldValues } from 'react-hook-form';
+
 import {
-  DATE_REGEXP,
-  ERROR_DATE_FIELD_VALIDATION,
   ERROR_FIELD_IS_REQUIRED,
   ERROR_NAME_FIELD_MAX_LENGTH,
   ERROR_NAME_FIELD_MIN_LENGTH,
@@ -14,6 +12,9 @@ import {
   NAME_REGEXP,
   URL_REGEXP
 } from '../../utils/constants';
+import { MouseEvent } from 'react';
+import { postEventToServer } from '../../utils/Api/apiRestDbIo';
+import { IEvent } from '../../utils/interfaces/IEvent.interface';
 
 export function AddBirthdayPopupForm({ setIsAddPopupVisible }: { setIsAddPopupVisible: any }) {
   const {
@@ -22,14 +23,23 @@ export function AddBirthdayPopupForm({ setIsAddPopupVisible }: { setIsAddPopupVi
     formState: { errors, isValid }
   } = useForm({ mode: 'all' });
 
-  const onSubmit = (data: FieldValues) => {};
+  const onSubmit = (data: FieldValues) => {
+    console.log(data);
+    try {
+      postEventToServer(data as IEvent);
+      setIsAddPopupVisible(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handlePopupClose = () => {
     setIsAddPopupVisible(false);
   };
 
-  const handlePopupBackgroundClick = (e: any) => {
-    if (e.target.className === 'addBirthday-popup__background') {
+  const handlePopupBackgroundClick = (e: MouseEvent<HTMLDivElement>) => {
+    const el = e.target as HTMLElement;
+    if (el?.className === 'addBirthday-popup__background') {
       setIsAddPopupVisible(false);
     }
   };
@@ -38,13 +48,7 @@ export function AddBirthdayPopupForm({ setIsAddPopupVisible }: { setIsAddPopupVi
     <div
       className="addBirthday-popup__background"
       onClick={handlePopupBackgroundClick}>
-      <div
-        className="addBirthday-popup"
-        onClick={() => {
-          console.log('test', DATE_REGEXP.test('10.10.1988'));
-
-          console.log(errors, ' ', isValid);
-        }}>
+      <div className="addBirthday-popup">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="addBirthday-popup__form">
@@ -92,27 +96,30 @@ export function AddBirthdayPopupForm({ setIsAddPopupVisible }: { setIsAddPopupVi
           )}
           <p className="addBirthday-popup__field-text">Дата рождения</p>
           <input
-            type="text"
-            {...register('birthdate', {
-              required: ERROR_FIELD_IS_REQUIRED,
-              pattern: {
-                value: DATE_REGEXP,
-                message: ERROR_DATE_FIELD_VALIDATION
-              }
+            type="date"
+            {...register('birthday', {
+              required: ERROR_FIELD_IS_REQUIRED
             })}
             id="field"
             className="addBirthday-popup__field"
             placeholder="Дата рождения"
           />
-          {errors.birthdate && (
-            <p className="addBirthday-popup__field-error">{errors.birthdate.message?.toString()}</p>
+          {errors.birthday && (
+            <p className="addBirthday-popup__field-error">{errors.birthday.message?.toString()}</p>
           )}
           <button
             disabled={!isValid}
             className={`addBirthday-popup__submit-btn ${
               !isValid ? 'addBirthday-popup__submit-btn_diabled' : ''
             }`}>
-            Добавить
+            Отправить
+          </button>
+          <button
+            disabled={!isValid}
+            className={`addBirthday-popup__submit-btn ${
+              !isValid ? 'addBirthday-popup__submit-btn_diabled' : ''
+            }`}>
+            Удалить
           </button>
         </form>
         <button

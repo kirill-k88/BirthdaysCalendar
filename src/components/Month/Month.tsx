@@ -1,5 +1,5 @@
 import './Month.scss';
-import { useContext, useLayoutEffect } from 'react';
+import { Dispatch, SetStateAction, useContext, useLayoutEffect } from 'react';
 import {
   getNextMonthDate,
   getPreviousMonthDate,
@@ -9,17 +9,23 @@ import {
 import { CurrentDateContext } from '../../contexts/CurrentDateContext';
 import { WEEKDAY_LIST } from '../../utils/constants';
 import { Day } from '../Day/Day';
+import { IEvent } from '../../utils/interfaces/IEvent.interface';
+import { myDateType } from '../../utils/dateType';
 
 export function Month({
   setCurentDate,
   eventList,
   isAuthtorized,
-  setIsAddPopupVisible
+  setIsAddPopupVisible,
+  currentEvent,
+  setCurrentEvent
 }: {
-  setCurentDate: any;
-  eventList: object[];
+  setCurentDate: Dispatch<SetStateAction<myDateType>>;
+  eventList: IEvent[];
   isAuthtorized: boolean;
-  setIsAddPopupVisible: any;
+  setIsAddPopupVisible: Dispatch<SetStateAction<boolean>>;
+  currentEvent: IEvent;
+  setCurrentEvent: Dispatch<SetStateAction<IEvent>>;
 }) {
   const { curentDate } = useContext(CurrentDateContext);
 
@@ -28,14 +34,16 @@ export function Month({
 
     for (let i = 1; i <= curentDate.days + curentDate.firstDayofMonth; i++) {
       if (i < curentDate.firstDayofMonth + 1) {
-        daysList.push(<div key={i}></div>);
+        daysList.push(<div key={new Date().getTime() + i}></div>);
       } else {
         daysList.push(
           <Day
-            key={i}
+            key={new Date().getTime() + i}
             eventList={eventList}
             thisDayNumber={i - curentDate.firstDayofMonth}
-            setIsAddPopupVisible={setIsAddPopupVisible}></Day>
+            setIsAddPopupVisible={setIsAddPopupVisible}
+            currentEvent={currentEvent}
+            setCurrentEvent={setCurrentEvent}></Day>
         );
       }
     }
@@ -50,7 +58,7 @@ export function Month({
       weekDayList.push(
         <div
           className="month__week-day"
-          key={index}>
+          key={new Date().getTime() + index}>
           <p
             className={`month__week-day-name ${
               index === 5 || index === 6 ? 'month__week-day-name_hollyday' : ''

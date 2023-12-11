@@ -49,5 +49,19 @@ export function getEndOfYear(date: Date): Date {
 export function convertMyDateToStr(date: myDateType): string {
   return `${date.year}-${date.month < 10 ? '0' + date.month : date.month}-${
     date.day < 10 ? '0' + date.day : date.day
+  }T00:00:00.000Z`;
+}
+
+export function converMyDateToMonthDayStr(date: myDateType): string {
+  return `${date.month < 10 ? '0' + date.month : date.month}-${
+    date.day < 10 ? '0' + date.day : date.day
   }`;
+}
+
+export function converServerDateToMonthDayStr(date: string): string {
+  const datePart = date.split('T')[0];
+  const month = datePart.split('-')[1];
+  const day = datePart.split('-')[2];
+
+  return `${month}-${day}`;
 }
