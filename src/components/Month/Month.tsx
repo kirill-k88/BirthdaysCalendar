@@ -1,16 +1,16 @@
 import './Month.scss';
-import { Dispatch, SetStateAction, useContext, useLayoutEffect } from 'react';
+import { Dispatch, SetStateAction, useContext } from 'react';
 import {
   getNextMonthDate,
   getPreviousMonthDate,
   getNextYearDate,
   getPreviousYearDate
-} from '../../utils/dateFunctions';
+} from '../../utils/functions/dateFunctions';
 import { CurrentDateContext } from '../../contexts/CurrentDateContext';
 import { WEEKDAY_LIST } from '../../utils/constants';
 import { Day } from '../Day/Day';
 import { IEvent } from '../../utils/interfaces/IEvent.interface';
-import { myDateType } from '../../utils/dateType';
+import { IMyDate } from '../../utils/interfaces/IMyDate.interface';
 
 export function Month({
   setCurentDate,
@@ -20,7 +20,7 @@ export function Month({
   currentEvent,
   setCurrentEvent
 }: {
-  setCurentDate: Dispatch<SetStateAction<myDateType>>;
+  setCurentDate: Dispatch<SetStateAction<IMyDate>>;
   eventList: IEvent[];
   isAuthtorized: boolean;
   setIsAddPopupVisible: Dispatch<SetStateAction<boolean>>;
@@ -56,9 +56,7 @@ export function Month({
 
     WEEKDAY_LIST.forEach((day, index) => {
       weekDayList.push(
-        <div
-          className="month__week-day"
-          key={new Date().getTime() + index}>
+        <div className="month__week-day" key={new Date().getTime() + index}>
           <p
             className={`month__week-day-name ${
               index === 5 || index === 6 ? 'month__week-day-name_hollyday' : ''
@@ -87,13 +85,6 @@ export function Month({
   const handlerButtonYearBackword = () => {
     setCurentDate(getPreviousYearDate(curentDate.date));
   };
-
-  useLayoutEffect(() => {
-    //Получить события календаря и расставить их в текущем месяце
-    if (isAuthtorized && !!eventList.length) {
-      console.log('eventList ==> ', eventList);
-    }
-  }, [eventList, isAuthtorized]);
 
   return (
     <section className="month">

@@ -80,6 +80,13 @@
         color: red;
       }
 
+      .addBirthday-popup__btn-container {
+        width: 100%;
+        display: flex;
+        gap: 5px;
+        justify-content: space-between;
+      }
+
       .addBirthday-popup__submit-btn {
         margin-top: 20px;
         padding: 5px 10px;

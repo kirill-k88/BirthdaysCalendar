@@ -1,4 +1,4 @@
-import { myDateType } from './dateType';
+import { IMyDate } from '../interfaces/IMyDate.interface';
 import {
   addMonths,
   getDaysInMonth,
@@ -8,25 +8,25 @@ import {
   startOfYear,
   endOfYear
 } from 'date-fns';
-import { MONTH_LIST } from './constants';
+import { MONTH_LIST } from '../constants';
 
-export function getNextMonthDate(date: Date): myDateType {
+export function getNextMonthDate(date: Date): IMyDate {
   return createNewDate(addMonths(date, 1));
 }
 
-export function getPreviousMonthDate(date: Date): myDateType {
+export function getPreviousMonthDate(date: Date): IMyDate {
   return createNewDate(addMonths(date, -1));
 }
 
-export function getNextYearDate(date: Date): myDateType {
+export function getNextYearDate(date: Date): IMyDate {
   return createNewDate(addYears(date, 1));
 }
 
-export function getPreviousYearDate(date: Date): myDateType {
+export function getPreviousYearDate(date: Date): IMyDate {
   return createNewDate(addYears(date, -1));
 }
 
-export function createNewDate(date: Date): myDateType {
+export function createNewDate(date: Date): IMyDate {
   return {
     date,
     year: date.getFullYear(),
@@ -46,13 +46,13 @@ export function getEndOfYear(date: Date): Date {
   return endOfYear(date);
 }
 
-export function convertMyDateToStr(date: myDateType): string {
+export function convertMyDateToStr(date: IMyDate): string {
   return `${date.year}-${date.month < 10 ? '0' + date.month : date.month}-${
     date.day < 10 ? '0' + date.day : date.day
   }T00:00:00.000Z`;
 }
 
-export function converMyDateToMonthDayStr(date: myDateType): string {
+export function converMyDateToMonthDayStr(date: IMyDate): string {
   return `${date.month < 10 ? '0' + date.month : date.month}-${
     date.day < 10 ? '0' + date.day : date.day
   }`;
@@ -64,4 +64,8 @@ export function converServerDateToMonthDayStr(date: string): string {
   const day = datePart.split('-')[2];
 
   return `${month}-${day}`;
+}
+
+export function converServerDateToISO(date: string): string {
+  return date.split('T')[0];
 }

@@ -12,25 +12,65 @@ import {
   NAME_REGEXP,
   URL_REGEXP
 } from '../../utils/constants';
-import { MouseEvent } from 'react';
-import { postEventToServer } from '../../utils/Api/apiRestDbIo';
+import { Dispatch, MouseEvent, SetStateAction } from 'react';
+import { changeEvent, deleteEvent, postEventToServer } from '../../utils/Api/apiRestDbIo';
 import { IEvent } from '../../utils/interfaces/IEvent.interface';
+import { converServerDateToISO } from '../../utils/functions/dateFunctions';
 
-export function AddBirthdayPopupForm({ setIsAddPopupVisible }: { setIsAddPopupVisible: any }) {
+export function AddBirthdayPopupForm({
+  setIsAddPopupVisible,
+  currentEvent,
+  setRequestError,
+  setNeedUpdate,
+  setIsLoading
+}: {
+  setIsAddPopupVisible: Dispatch<SetStateAction<boolean>>;
+  currentEvent: IEvent;
+  setRequestError: Dispatch<SetStateAction<string>>;
+  setNeedUpdate: Dispatch<SetStateAction<boolean>>;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+}) {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid }
-  } = useForm({ mode: 'all' });
+  } = useForm({
+    mode: 'all',
+    defaultValues: {
+      name: currentEvent.name,
+      photoUrl: currentEvent.photoUrl,
+      birthday: converServerDateToISO(currentEvent.birthday)
+    }
+  });
 
-  const onSubmit = (data: FieldValues) => {
-    console.log(data);
+  const onSubmit = async (data: FieldValues) => {
+    setIsLoading(true);
     try {
-      postEventToServer(data as IEvent);
+      if (!currentEvent._id.length) {
+        await postEventToServer(data as IEvent);
+      } else {
+        await changeEvent({ ...(data as IEvent), _id: currentEvent._id });
+      }
       setIsAddPopupVisible(false);
+      setNeedUpdate(true);
     } catch (err) {
+      setRequestError((err as Error).message || 'Ошибка при запросе');
       console.log(err);
     }
+    setIsLoading(false);
+  };
+
+  const onDelete = async () => {
+    setIsLoading(true);
+    try {
+      await deleteEvent(currentEvent._id);
+      setIsAddPopupVisible(false);
+      setNeedUpdate(true);
+    } catch (err) {
+      setRequestError((err as Error).message || 'Ошибка при запросе');
+      console.log(err);
+    }
+    setIsLoading(false);
   };
 
   const handlePopupClose = () => {
@@ -45,13 +85,9 @@ export function AddBirthdayPopupForm({ setIsAddPopupVisible }: { setIsAddPopupVi
   };
 
   return (
-    <div
-      className="addBirthday-popup__background"
-      onClick={handlePopupBackgroundClick}>
+    <div className="addBirthday-popup__background" onClick={handlePopupBackgroundClick}>
       <div className="addBirthday-popup">
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="addBirthday-popup__form">
+        <form className="addBirthday-popup__form" onSubmit={handleSubmit(onSubmit)}>
           <p className="addBirthday-popup__field-text">Имя</p>
           <input
             type="text"
@@ -107,25 +143,36 @@ export function AddBirthdayPopupForm({ setIsAddPopupVisible }: { setIsAddPopupVi
           {errors.birthday && (
             <p className="addBirthday-popup__field-error">{errors.birthday.message?.toString()}</p>
           )}
-          <button
-            disabled={!isValid}
-            className={`addBirthday-popup__submit-btn ${
-              !isValid ? 'addBirthday-popup__submit-btn_diabled' : ''
-            }`}>
-            Отправить
-          </button>
-          <button
-            disabled={!isValid}
-            className={`addBirthday-popup__submit-btn ${
-              !isValid ? 'addBirthday-popup__submit-btn_diabled' : ''
-            }`}>
-            Удалить
-          </button>
+          {currentEvent._id.length ? (
+            <div className="addBirthday-popup__btn-container">
+              <button
+                type="submit"
+                disabled={!isValid}
+                className={`addBirthday-popup__submit-btn ${
+                  !isValid ? 'addBirthday-popup__submit-btn_diabled' : ''
+                }`}>
+                Изменить
+              </button>
+              <button
+                type="button"
+                onClick={onDelete}
+                disabled={!isValid}
+                className={`addBirthday-popup__submit-btn`}>
+                Удалить
+              </button>
+            </div>
+          ) : (
+            <button
+              type="submit"
+              disabled={!isValid}
+              className={`addBirthday-popup__submit-btn ${
+                !isValid ? 'addBirthday-popup__submit-btn_diabled' : ''
+              }`}>
+              Создать
+            </button>
+          )}
         </form>
-        <button
-          className="addBirthday-popup__close-btn"
-          type="button"
-          onClick={handlePopupClose}>
+        <button className="addBirthday-popup__close-btn" type="button" onClick={handlePopupClose}>
           ✕
         </button>
       </div>

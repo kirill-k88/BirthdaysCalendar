@@ -6,8 +6,9 @@ import { useContext } from 'react';
 import {
   converMyDateToMonthDayStr,
   converServerDateToMonthDayStr,
+  convertMyDateToStr,
   createNewDate
-} from '../../utils/dateFunctions';
+} from '../../utils/functions/dateFunctions';
 import { IEvent } from '../../utils/interfaces/IEvent.interface';
 import { INIT_EVENT_LIST } from '../../utils/constants';
 
@@ -32,7 +33,7 @@ export function Day({
 
   useEffect(() => {
     const thisDayStr = converMyDateToMonthDayStr(thisDate);
-    if (!!eventList.length) {
+    if (eventList.length) {
       setBirthdayList(
         eventList.filter((e: IEvent) => {
           return converServerDateToMonthDayStr(e.birthday) === thisDayStr;
@@ -50,6 +51,7 @@ export function Day({
   }
 
   function handleClick() {
+    setCurrentEvent({ ...INIT_EVENT_LIST[0], birthday: convertMyDateToStr(thisDate) });
     setIsAddPopupVisible(true);
   }
 
@@ -60,11 +62,12 @@ export function Day({
       key={new Date().getTime()}>
       <p className={`day__number ${isToday() && 'day__number_today'}`}>{thisDayNumber}</p>
       <div className="day__birthday-container">
-        {birthdayList.map((e: IEvent, i) => {
+        {birthdayList.map((e: IEvent) => {
           return (
             <BirthdaySign
               setCurrentEvent={setCurrentEvent}
               event={e}
+              setIsAddPopupVisible={setIsAddPopupVisible}
               key={e._id}
             />
           );

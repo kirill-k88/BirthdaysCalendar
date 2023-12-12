@@ -1,16 +1,20 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, MouseEvent, SetStateAction } from 'react';
 import { IEvent } from '../../utils/interfaces/IEvent.interface';
 import './BirthdaySign.scss';
 
 export function BirthdaySign({
   event,
-  setCurrentEvent
+  setCurrentEvent,
+  setIsAddPopupVisible
 }: {
   event: IEvent;
   setCurrentEvent: Dispatch<SetStateAction<IEvent>>;
+  setIsAddPopupVisible: Dispatch<SetStateAction<boolean>>;
 }) {
-  const handleClick = () => {
+  const handleClick = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     setCurrentEvent(event);
+    setIsAddPopupVisible(true);
   };
 
   return (

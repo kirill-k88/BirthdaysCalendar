@@ -1,4 +1,4 @@
-export type myDateType = {
+export interface IMyDate {
   date: Date;
   year: number;
   month: number;
@@ -6,4 +6,4 @@ export type myDateType = {
   days: number;
   day: number;
   firstDayofMonth: number;
-};
+}
