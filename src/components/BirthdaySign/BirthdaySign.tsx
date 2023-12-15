@@ -18,14 +18,8 @@ export function BirthdaySign({
   };
 
   return (
-    <div
-      className="birthday-sign"
-      onClick={handleClick}>
-      <img
-        src={event.photoUrl}
-        alt="Avatar"
-        className="birthday-sign__photo"
-      />
+    <div className="birthday-sign" onClick={handleClick}>
+      <img src={event.photoUrl} alt="Avatar" className="birthday-sign__photo" />
       <p className="birthday-sign__info">{event.name}</p>
     </div>
   );

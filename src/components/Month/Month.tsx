@@ -1,33 +1,29 @@
 import './Month.scss';
-import { Dispatch, SetStateAction, useContext } from 'react';
-import {
-  getNextMonthDate,
-  getPreviousMonthDate,
-  getNextYearDate,
-  getPreviousYearDate
-} from '../../utils/functions/dateFunctions';
-import { CurrentDateContext } from '../../contexts/CurrentDateContext';
+import { Dispatch, SetStateAction } from 'react';
 import { WEEKDAY_LIST } from '../../utils/constants';
 import { Day } from '../Day/Day';
 import { IEvent } from '../../utils/interfaces/IEvent.interface';
-import { IMyDate } from '../../utils/interfaces/IMyDate.interface';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootStore } from '../store/store';
+
+import {
+  setCurentDateNextMonth,
+  setCurentDatePreviousMonth,
+  setCurentDateNextYear,
+  setCurentDatePreviousYear
+} from '../store/currentDateSlice';
 
 export function Month({
-  setCurentDate,
-  eventList,
   isAuthtorized,
   setIsAddPopupVisible,
-  currentEvent,
   setCurrentEvent
 }: {
-  setCurentDate: Dispatch<SetStateAction<IMyDate>>;
-  eventList: IEvent[];
   isAuthtorized: boolean;
   setIsAddPopupVisible: Dispatch<SetStateAction<boolean>>;
-  currentEvent: IEvent;
   setCurrentEvent: Dispatch<SetStateAction<IEvent>>;
 }) {
-  const { curentDate } = useContext(CurrentDateContext);
+  const dispatch = useDispatch();
+  const { curentDate } = useSelector((store: RootStore) => store.currentDateReducer);
 
   function getDayElementList(): JSX.Element[] {
     const daysList: JSX.Element[] = [];
@@ -39,10 +35,8 @@ export function Month({
         daysList.push(
           <Day
             key={new Date().getTime() + i}
-            eventList={eventList}
             thisDayNumber={i - curentDate.firstDayofMonth}
             setIsAddPopupVisible={setIsAddPopupVisible}
-            currentEvent={currentEvent}
             setCurrentEvent={setCurrentEvent}></Day>
         );
       }
@@ -71,19 +65,19 @@ export function Month({
   }
 
   const handlerButtonMonthForward = () => {
-    setCurentDate(getNextMonthDate(curentDate.date));
+    dispatch(setCurentDateNextMonth());
   };
 
   const handlerButtonMonthBackword = () => {
-    setCurentDate(getPreviousMonthDate(curentDate.date));
+    dispatch(setCurentDatePreviousMonth());
   };
 
   const handlerButtonYearForward = () => {
-    setCurentDate(getNextYearDate(curentDate.date));
+    dispatch(setCurentDateNextYear());
   };
 
   const handlerButtonYearBackword = () => {
-    setCurentDate(getPreviousYearDate(curentDate.date));
+    dispatch(setCurentDatePreviousYear());
   };
 
   return (

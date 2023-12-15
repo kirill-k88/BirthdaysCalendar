@@ -1,8 +1,6 @@
 import './Day.scss';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { CurrentDateContext } from '../../contexts/CurrentDateContext';
 import { BirthdaySign } from '../BirthdaySign/BirthdaySign';
-import { useContext } from 'react';
 import {
   converMyDateToMonthDayStr,
   converServerDateToMonthDayStr,
@@ -11,29 +9,29 @@ import {
 } from '../../utils/functions/dateFunctions';
 import { IEvent } from '../../utils/interfaces/IEvent.interface';
 import { INIT_EVENT_LIST } from '../../utils/constants';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../store/store';
 
 export function Day({
-  eventList,
   thisDayNumber,
   setIsAddPopupVisible,
-  currentEvent,
   setCurrentEvent
 }: {
-  eventList: IEvent[];
   thisDayNumber: number;
   setIsAddPopupVisible: Dispatch<SetStateAction<boolean>>;
-  currentEvent: IEvent;
   setCurrentEvent: Dispatch<SetStateAction<IEvent>>;
 }) {
   const [birthdayList, setBirthdayList] = useState<IEvent[]>(INIT_EVENT_LIST);
-  const { curentDate } = useContext(CurrentDateContext);
+
+  const { curentDate } = useSelector((store: RootStore) => store.currentDateReducer);
+  const { eventList } = useSelector((store: RootStore) => store.eventListReducer);
 
   const nowDate = new Date();
   const thisDate = createNewDate(new Date(curentDate.year, curentDate.month - 1, thisDayNumber));
 
   useEffect(() => {
     const thisDayStr = converMyDateToMonthDayStr(thisDate);
-    if (eventList.length) {
+    if (eventList?.length) {
       setBirthdayList(
         eventList.filter((e: IEvent) => {
           return converServerDateToMonthDayStr(e.birthday) === thisDayStr;
