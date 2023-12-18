@@ -5,27 +5,26 @@ import { Footer } from '../Footer/Footer';
 import { Month } from '../Month/Month';
 import { AddBirthdayPopupForm } from '../AddBirthdayPopupForm/AddBirthdayPopupForm';
 import { getEventList } from '../../utils/Api/apiRestDbIo';
-import { IEvent } from '../../utils/interfaces/IEvent.interface';
-import { INIT_EVENT_LIST } from '../../utils/constants';
 import { ErrorMesssagePopup } from '../ErrorMesssagePopup/ErrorMesssagePopup';
 import { Preloader } from '../Preloader/Preloader';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setEventList } from '../store/eventListSlice';
+import { setIsLoading } from '../store/isloadingSlice';
+import { RootStore } from '../store/store';
 
 export function App() {
   const [isAuthtorized, setIsAuthtorized] = useState(true);
   const [needUpdate, setNeedUpdate] = useState(true);
-  const [isAddPopupVisible, setIsAddPopupVisible] = useState(false);
-  const [currentEvent, setCurrentEvent] = useState<IEvent>(INIT_EVENT_LIST[0]);
   const [requestError, setRequestError] = useState<string>('');
-  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
+  const { isLoading } = useSelector((store: RootStore) => store.isLoadingReducer);
+  const { isAddPopupVisible } = useSelector((store: RootStore) => store.isAddPopupVisibleReducer);
 
   useEffect(() => {
     (async () => {
       if (isAuthtorized) {
-        setIsLoading(true);
+        dispatch(setIsLoading({ isLoading: true }));
         try {
           dispatch(
             setEventList({
@@ -36,7 +35,7 @@ export function App() {
           setRequestError((err as Error).message || 'Ошибка при запросе');
           console.log(err);
         }
-        setIsLoading(false);
+        dispatch(setIsLoading({ isLoading: false }));
         setNeedUpdate(false);
       }
     })();
@@ -50,19 +49,9 @@ export function App() {
       ) : (
         <>
           <Header isAuthtorized={isAuthtorized} />
-          <Month
-            isAuthtorized={isAuthtorized}
-            setIsAddPopupVisible={setIsAddPopupVisible}
-            setCurrentEvent={setCurrentEvent}
-          />
+          <Month isAuthtorized={isAuthtorized} />
           {isAddPopupVisible && (
-            <AddBirthdayPopupForm
-              setIsAddPopupVisible={setIsAddPopupVisible}
-              currentEvent={currentEvent}
-              setRequestError={setRequestError}
-              setNeedUpdate={setNeedUpdate}
-              setIsLoading={setIsLoading}
-            />
+            <AddBirthdayPopupForm setRequestError={setRequestError} setNeedUpdate={setNeedUpdate} />
           )}
           <Footer />
         </>

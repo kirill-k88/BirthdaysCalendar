@@ -13,15 +13,7 @@ import {
   setCurentDatePreviousYear
 } from '../store/currentDateSlice';
 
-export function Month({
-  isAuthtorized,
-  setIsAddPopupVisible,
-  setCurrentEvent
-}: {
-  isAuthtorized: boolean;
-  setIsAddPopupVisible: Dispatch<SetStateAction<boolean>>;
-  setCurrentEvent: Dispatch<SetStateAction<IEvent>>;
-}) {
+export function Month({ isAuthtorized }: { isAuthtorized: boolean }) {
   const dispatch = useDispatch();
   const { curentDate } = useSelector((store: RootStore) => store.currentDateReducer);
 
@@ -33,11 +25,7 @@ export function Month({
         daysList.push(<div key={new Date().getTime() + i}></div>);
       } else {
         daysList.push(
-          <Day
-            key={new Date().getTime() + i}
-            thisDayNumber={i - curentDate.firstDayofMonth}
-            setIsAddPopupVisible={setIsAddPopupVisible}
-            setCurrentEvent={setCurrentEvent}></Day>
+          <Day key={new Date().getTime() + i} thisDayNumber={i - curentDate.firstDayofMonth}></Day>
         );
       }
     }

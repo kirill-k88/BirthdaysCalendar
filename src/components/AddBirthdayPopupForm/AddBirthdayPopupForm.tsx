@@ -16,20 +16,21 @@ import { Dispatch, MouseEvent, SetStateAction } from 'react';
 import { changeEvent, deleteEvent, postEventToServer } from '../../utils/Api/apiRestDbIo';
 import { IEvent } from '../../utils/interfaces/IEvent.interface';
 import { converServerDateToISO } from '../../utils/functions/dateFunctions';
+import { setIsLoading } from '../store/isloadingSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootStore } from '../store/store';
+import { setIsAddPopupVisible } from '../store/isAddPopupVisibleSlice';
 
 export function AddBirthdayPopupForm({
-  setIsAddPopupVisible,
-  currentEvent,
   setRequestError,
-  setNeedUpdate,
-  setIsLoading
+  setNeedUpdate
 }: {
-  setIsAddPopupVisible: Dispatch<SetStateAction<boolean>>;
-  currentEvent: IEvent;
   setRequestError: Dispatch<SetStateAction<string>>;
   setNeedUpdate: Dispatch<SetStateAction<boolean>>;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }) {
+  const dispatch = useDispatch();
+  const { currentEvent } = useSelector((store: RootStore) => store.currentEventReducer);
+
   const {
     register,
     handleSubmit,
@@ -44,43 +45,43 @@ export function AddBirthdayPopupForm({
   });
 
   const onSubmit = async (data: FieldValues) => {
-    setIsLoading(true);
+    setIsLoading({ isLoading: true });
     try {
       if (!currentEvent._id.length) {
         await postEventToServer(data as IEvent);
       } else {
         await changeEvent({ ...(data as IEvent), _id: currentEvent._id });
       }
-      setIsAddPopupVisible(false);
+      dispatch(setIsAddPopupVisible({ isAddPopupVisible: false }));
       setNeedUpdate(true);
     } catch (err) {
       setRequestError((err as Error).message || 'Ошибка при запросе');
       console.log(err);
     }
-    setIsLoading(false);
+    setIsLoading({ isLoading: false });
   };
 
   const onDelete = async () => {
-    setIsLoading(true);
+    dispatch(setIsLoading({ isLoading: true }));
     try {
       await deleteEvent(currentEvent._id);
-      setIsAddPopupVisible(false);
+      dispatch(setIsAddPopupVisible({ isAddPopupVisible: false }));
       setNeedUpdate(true);
     } catch (err) {
       setRequestError((err as Error).message || 'Ошибка при запросе');
       console.log(err);
     }
-    setIsLoading(false);
+    dispatch(setIsLoading({ isLoading: true }));
   };
 
   const handlePopupClose = () => {
-    setIsAddPopupVisible(false);
+    dispatch(setIsAddPopupVisible({ isAddPopupVisible: false }));
   };
 
   const handlePopupBackgroundClick = (e: MouseEvent<HTMLDivElement>) => {
     const el = e.target as HTMLElement;
     if (el?.className === 'addBirthday-popup__background') {
-      setIsAddPopupVisible(false);
+      dispatch(setIsAddPopupVisible({ isAddPopupVisible: false }));
     }
   };
 

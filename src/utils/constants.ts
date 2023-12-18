@@ -1,3 +1,4 @@
+import { IEvent } from './interfaces/IEvent.interface';
 import { IRequestError } from './interfaces/IRequestError.interface';
 import { IRequestErrorList } from './interfaces/IRequestErrorList.interface';
 
@@ -38,7 +39,7 @@ export const API_RESTDB_HEADERS = {
   'x-apikey': API_KEY
 };
 
-export const INIT_EVENT_LIST = [
+export const INIT_EVENT_LIST: IEvent[] = [
   {
     _id: '',
     name: '',

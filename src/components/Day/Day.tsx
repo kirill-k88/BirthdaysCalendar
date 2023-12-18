@@ -9,18 +9,13 @@ import {
 } from '../../utils/functions/dateFunctions';
 import { IEvent } from '../../utils/interfaces/IEvent.interface';
 import { INIT_EVENT_LIST } from '../../utils/constants';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootStore } from '../store/store';
+import { setCurrentEvent } from '../store/currentEventSlice';
+import { setIsAddPopupVisible } from '../store/isAddPopupVisibleSlice';
 
-export function Day({
-  thisDayNumber,
-  setIsAddPopupVisible,
-  setCurrentEvent
-}: {
-  thisDayNumber: number;
-  setIsAddPopupVisible: Dispatch<SetStateAction<boolean>>;
-  setCurrentEvent: Dispatch<SetStateAction<IEvent>>;
-}) {
+export function Day({ thisDayNumber }: { thisDayNumber: number }) {
+  const dispatch = useDispatch();
   const [birthdayList, setBirthdayList] = useState<IEvent[]>(INIT_EVENT_LIST);
 
   const { curentDate } = useSelector((store: RootStore) => store.currentDateReducer);
@@ -49,8 +44,12 @@ export function Day({
   }
 
   function handleClick() {
-    setCurrentEvent({ ...INIT_EVENT_LIST[0], birthday: convertMyDateToStr(thisDate) });
-    setIsAddPopupVisible(true);
+    dispatch(
+      setCurrentEvent({
+        currentEvent: { ...INIT_EVENT_LIST[0], birthday: convertMyDateToStr(thisDate) }
+      })
+    );
+    dispatch(setIsAddPopupVisible({ isAddPopupVisible: true }));
   }
 
   return (
@@ -61,14 +60,7 @@ export function Day({
       <p className={`day__number ${isToday() && 'day__number_today'}`}>{thisDayNumber}</p>
       <div className="day__birthday-container">
         {birthdayList.map((e: IEvent) => {
-          return (
-            <BirthdaySign
-              setCurrentEvent={setCurrentEvent}
-              event={e}
-              setIsAddPopupVisible={setIsAddPopupVisible}
-              key={e._id}
-            />
-          );
+          return <BirthdaySign event={e} key={e._id} />;
         })}
       </div>
     </div>

@@ -1,20 +1,17 @@
 import { Dispatch, MouseEvent, SetStateAction } from 'react';
 import { IEvent } from '../../utils/interfaces/IEvent.interface';
 import './BirthdaySign.scss';
+import { useDispatch } from 'react-redux';
+import { setCurrentEvent } from '../store/currentEventSlice';
+import { setIsAddPopupVisible } from '../store/isAddPopupVisibleSlice';
 
-export function BirthdaySign({
-  event,
-  setCurrentEvent,
-  setIsAddPopupVisible
-}: {
-  event: IEvent;
-  setCurrentEvent: Dispatch<SetStateAction<IEvent>>;
-  setIsAddPopupVisible: Dispatch<SetStateAction<boolean>>;
-}) {
+export function BirthdaySign({ event }: { event: IEvent }) {
+  const dispatch = useDispatch();
+
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    setCurrentEvent(event);
-    setIsAddPopupVisible(true);
+    dispatch(setCurrentEvent({ currentEvent: event }));
+    dispatch(setIsAddPopupVisible({ isAddPopupVisible: true }));
   };
 
   return (
