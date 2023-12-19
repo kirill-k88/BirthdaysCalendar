@@ -4,6 +4,7 @@ import { eventListReducer } from './eventListSlice';
 import { isLoadingReducer } from './isloadingSlice';
 import { currentEventReducer } from './currentEventSlice';
 import { isAddPopupVisibleReducer } from './isAddPopupVisibleSlice';
+import { requestErrorReducer } from './requestErrorSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,8 +12,13 @@ export const store = configureStore({
     eventListReducer,
     isLoadingReducer,
     currentEventReducer,
-    isAddPopupVisibleReducer
-  }
+    isAddPopupVisibleReducer,
+    requestErrorReducer
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false
+    })
 });
 
 export type RootStore = ReturnType<typeof store.getState>;

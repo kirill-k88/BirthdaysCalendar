@@ -1,21 +1,21 @@
 import './ErrorMesssagePopup.scss';
-import { SetStateAction, Dispatch, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootStore } from '../store/store';
+import { setRequestError } from '../store/requestErrorSlice';
 
-export function ErrorMesssagePopup({
-  requestError,
-  setRequestError
-}: {
-  requestError: string;
-  setRequestError: Dispatch<SetStateAction<string>>;
-}) {
+export function ErrorMesssagePopup() {
+  const dispatch = useDispatch();
+  const { requestError } = useSelector((store: RootStore) => store.requestErrorReducer);
+
   const handleCloseBtnClick = () => {
-    setRequestError('');
+    dispatch(setRequestError({ requestError: '' }));
   };
 
   useEffect(() => {
     if (requestError !== '') {
       setTimeout(() => {
-        setRequestError('');
+        dispatch(setRequestError({ requestError: '' }));
       }, 2000);
     }
   }, [requestError]);

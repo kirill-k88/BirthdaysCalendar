@@ -11,35 +11,35 @@ import {
 const myDate: IMyDate = createNewDate(new Date());
 
 const currentDateSlice = createSlice({
-  name: 'curentDate',
+  name: 'currentDate',
   initialState: {
-    curentDate: myDate
+    currentDate: myDate
   },
   reducers: {
-    setCurentDate(state, action) {
-      state.curentDate = action.payload.curentDate;
+    setCurrentDate(state, action) {
+      state.currentDate = action.payload.currentDate;
     },
-    setCurentDateNextMonth(state) {
-      state.curentDate = getNextMonthDate(state.curentDate.date);
+    setCurrentDateNextMonth(state) {
+      state.currentDate = getNextMonthDate(state.currentDate.date);
     },
-    setCurentDatePreviousMonth(state) {
-      state.curentDate = getPreviousMonthDate(state.curentDate.date);
+    setCurrentDatePreviousMonth(state) {
+      state.currentDate = getPreviousMonthDate(state.currentDate.date);
     },
-    setCurentDateNextYear(state) {
-      state.curentDate = getNextYearDate(state.curentDate.date);
+    setCurrentDateNextYear(state) {
+      state.currentDate = getNextYearDate(state.currentDate.date);
     },
-    setCurentDatePreviousYear(state) {
-      state.curentDate = getPreviousYearDate(state.curentDate.date);
+    setCurrentDatePreviousYear(state) {
+      state.currentDate = getPreviousYearDate(state.currentDate.date);
     }
   }
 });
 
 export const {
-  setCurentDate,
-  setCurentDateNextMonth,
-  setCurentDatePreviousMonth,
-  setCurentDateNextYear,
-  setCurentDatePreviousYear
+  setCurrentDate,
+  setCurrentDateNextMonth,
+  setCurrentDatePreviousMonth,
+  setCurrentDateNextYear,
+  setCurrentDatePreviousYear
 } = currentDateSlice.actions;
 
 export const currentDateReducer = currentDateSlice.reducer;

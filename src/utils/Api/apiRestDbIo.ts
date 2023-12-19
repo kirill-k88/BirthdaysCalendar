@@ -12,7 +12,7 @@ async function doFetch(url: string, params: object) {
   return await res.json();
 }
 
-export async function getEventList() {
+export async function getEventListFetch() {
   const url = RESTDB_URL_PATH + '/birthdays';
   const params = {
     method: 'GET',

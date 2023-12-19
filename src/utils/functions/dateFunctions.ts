@@ -52,13 +52,13 @@ export function convertMyDateToStr(date: IMyDate): string {
   }T00:00:00.000Z`;
 }
 
-export function converMyDateToMonthDayStr(date: IMyDate): string {
+export function convertMyDateToMonthDayStr(date: IMyDate): string {
   return `${date.month < 10 ? '0' + date.month : date.month}-${
     date.day < 10 ? '0' + date.day : date.day
   }`;
 }
 
-export function converServerDateToMonthDayStr(date: string): string {
+export function convertServerDateToMonthDayStr(date: string): string {
   const datePart = date.split('T')[0];
   const month = datePart.split('-')[1];
   const day = datePart.split('-')[2];
@@ -66,6 +66,6 @@ export function converServerDateToMonthDayStr(date: string): string {
   return `${month}-${day}`;
 }
 
-export function converServerDateToISO(date: string): string {
+export function convertServerDateToISO(date: string): string {
   return date.split('T')[0];
 }

@@ -4,22 +4,22 @@ import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { Month } from '../Month/Month';
 import { AddBirthdayPopupForm } from '../AddBirthdayPopupForm/AddBirthdayPopupForm';
-import { getEventList } from '../../utils/Api/apiRestDbIo';
+import { getEventListFetch } from '../../utils/Api/apiRestDbIo';
 import { ErrorMesssagePopup } from '../ErrorMesssagePopup/ErrorMesssagePopup';
 import { Preloader } from '../Preloader/Preloader';
 import { useDispatch, useSelector } from 'react-redux';
-import { setEventList } from '../store/eventListSlice';
+import { setEventList, setNeedUpdateEventList } from '../store/eventListSlice';
 import { setIsLoading } from '../store/isloadingSlice';
 import { RootStore } from '../store/store';
+import { setRequestError } from '../store/requestErrorSlice';
 
 export function App() {
   const [isAuthtorized, setIsAuthtorized] = useState(true);
-  const [needUpdate, setNeedUpdate] = useState(true);
-  const [requestError, setRequestError] = useState<string>('');
 
   const dispatch = useDispatch();
   const { isLoading } = useSelector((store: RootStore) => store.isLoadingReducer);
   const { isAddPopupVisible } = useSelector((store: RootStore) => store.isAddPopupVisibleReducer);
+  const { needUpdateEventList } = useSelector((store: RootStore) => store.eventListReducer);
 
   useEffect(() => {
     (async () => {
@@ -28,31 +28,31 @@ export function App() {
         try {
           dispatch(
             setEventList({
-              eventList: await getEventList()
+              eventList: await getEventListFetch()
             })
           );
         } catch (err) {
-          setRequestError((err as Error).message || 'Ошибка при запросе');
+          dispatch(
+            setRequestError({ requestError: (err as Error).message || 'Ошибка при запросе' })
+          );
           console.log(err);
         }
         dispatch(setIsLoading({ isLoading: false }));
-        setNeedUpdate(false);
+        dispatch(setNeedUpdateEventList({ needUpdateEventList: false }));
       }
     })();
-  }, [isAuthtorized, needUpdate]);
+  }, [isAuthtorized, needUpdateEventList]);
 
   return (
     <div className="app">
-      <ErrorMesssagePopup requestError={requestError} setRequestError={setRequestError} />
+      <ErrorMesssagePopup />
       {isLoading ? (
         <Preloader />
       ) : (
         <>
           <Header isAuthtorized={isAuthtorized} />
           <Month isAuthtorized={isAuthtorized} />
-          {isAddPopupVisible && (
-            <AddBirthdayPopupForm setRequestError={setRequestError} setNeedUpdate={setNeedUpdate} />
-          )}
+          {isAddPopupVisible && <AddBirthdayPopupForm />}
           <Footer />
         </>
       )}

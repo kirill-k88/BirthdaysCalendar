@@ -12,22 +12,18 @@ import {
   NAME_REGEXP,
   URL_REGEXP
 } from '../../utils/constants';
-import { Dispatch, MouseEvent, SetStateAction } from 'react';
+import { MouseEvent } from 'react';
 import { changeEvent, deleteEvent, postEventToServer } from '../../utils/Api/apiRestDbIo';
 import { IEvent } from '../../utils/interfaces/IEvent.interface';
-import { converServerDateToISO } from '../../utils/functions/dateFunctions';
+import { convertServerDateToISO } from '../../utils/functions/dateFunctions';
 import { setIsLoading } from '../store/isloadingSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootStore } from '../store/store';
 import { setIsAddPopupVisible } from '../store/isAddPopupVisibleSlice';
+import { setNeedUpdateEventList } from '../store/eventListSlice';
+import { setRequestError } from '../store/requestErrorSlice';
 
-export function AddBirthdayPopupForm({
-  setRequestError,
-  setNeedUpdate
-}: {
-  setRequestError: Dispatch<SetStateAction<string>>;
-  setNeedUpdate: Dispatch<SetStateAction<boolean>>;
-}) {
+export function AddBirthdayPopupForm() {
   const dispatch = useDispatch();
   const { currentEvent } = useSelector((store: RootStore) => store.currentEventReducer);
 
@@ -40,7 +36,7 @@ export function AddBirthdayPopupForm({
     defaultValues: {
       name: currentEvent.name,
       photoUrl: currentEvent.photoUrl,
-      birthday: converServerDateToISO(currentEvent.birthday)
+      birthday: convertServerDateToISO(currentEvent.birthday)
     }
   });
 
@@ -53,9 +49,9 @@ export function AddBirthdayPopupForm({
         await changeEvent({ ...(data as IEvent), _id: currentEvent._id });
       }
       dispatch(setIsAddPopupVisible({ isAddPopupVisible: false }));
-      setNeedUpdate(true);
+      dispatch(setNeedUpdateEventList({ needUpdateEventList: true }));
     } catch (err) {
-      setRequestError((err as Error).message || 'Ошибка при запросе');
+      dispatch(setRequestError({ requestError: (err as Error).message || 'Ошибка при запросе' }));
       console.log(err);
     }
     setIsLoading({ isLoading: false });
@@ -66,7 +62,7 @@ export function AddBirthdayPopupForm({
     try {
       await deleteEvent(currentEvent._id);
       dispatch(setIsAddPopupVisible({ isAddPopupVisible: false }));
-      setNeedUpdate(true);
+      dispatch(setNeedUpdateEventList({ needUpdateEventList: true }));
     } catch (err) {
       setRequestError((err as Error).message || 'Ошибка при запросе');
       console.log(err);

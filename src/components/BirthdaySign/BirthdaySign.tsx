@@ -1,4 +1,4 @@
-import { Dispatch, MouseEvent, SetStateAction } from 'react';
+import { MouseEvent } from 'react';
 import { IEvent } from '../../utils/interfaces/IEvent.interface';
 import './BirthdaySign.scss';
 import { useDispatch } from 'react-redux';

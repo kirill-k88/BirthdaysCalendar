@@ -1,31 +1,29 @@
 import './Month.scss';
-import { Dispatch, SetStateAction } from 'react';
 import { WEEKDAY_LIST } from '../../utils/constants';
 import { Day } from '../Day/Day';
-import { IEvent } from '../../utils/interfaces/IEvent.interface';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootStore } from '../store/store';
 
 import {
-  setCurentDateNextMonth,
-  setCurentDatePreviousMonth,
-  setCurentDateNextYear,
-  setCurentDatePreviousYear
+  setCurrentDateNextMonth,
+  setCurrentDatePreviousMonth,
+  setCurrentDateNextYear,
+  setCurrentDatePreviousYear
 } from '../store/currentDateSlice';
 
 export function Month({ isAuthtorized }: { isAuthtorized: boolean }) {
   const dispatch = useDispatch();
-  const { curentDate } = useSelector((store: RootStore) => store.currentDateReducer);
+  const { currentDate } = useSelector((store: RootStore) => store.currentDateReducer);
 
   function getDayElementList(): JSX.Element[] {
     const daysList: JSX.Element[] = [];
 
-    for (let i = 1; i <= curentDate.days + curentDate.firstDayofMonth; i++) {
-      if (i < curentDate.firstDayofMonth + 1) {
+    for (let i = 1; i <= currentDate.days + currentDate.firstDayofMonth; i++) {
+      if (i < currentDate.firstDayofMonth + 1) {
         daysList.push(<div key={new Date().getTime() + i}></div>);
       } else {
         daysList.push(
-          <Day key={new Date().getTime() + i} thisDayNumber={i - curentDate.firstDayofMonth}></Day>
+          <Day key={new Date().getTime() + i} thisDayNumber={i - currentDate.firstDayofMonth}></Day>
         );
       }
     }
@@ -53,19 +51,19 @@ export function Month({ isAuthtorized }: { isAuthtorized: boolean }) {
   }
 
   const handlerButtonMonthForward = () => {
-    dispatch(setCurentDateNextMonth());
+    dispatch(setCurrentDateNextMonth());
   };
 
   const handlerButtonMonthBackword = () => {
-    dispatch(setCurentDatePreviousMonth());
+    dispatch(setCurrentDatePreviousMonth());
   };
 
   const handlerButtonYearForward = () => {
-    dispatch(setCurentDateNextYear());
+    dispatch(setCurrentDateNextYear());
   };
 
   const handlerButtonYearBackword = () => {
-    dispatch(setCurentDatePreviousYear());
+    dispatch(setCurrentDatePreviousYear());
   };
 
   return (
@@ -77,7 +75,7 @@ export function Month({ isAuthtorized }: { isAuthtorized: boolean }) {
             className="month__changeYearBtn common-button"
             type="button"
             onClick={handlerButtonYearBackword}>{`<`}</button>
-          <h2 className="month__year noselect">{curentDate.year || ''}</h2>
+          <h2 className="month__year noselect">{currentDate.year || ''}</h2>
           <button
             className="month__changeYearBtn common-button"
             type="button"
@@ -88,7 +86,7 @@ export function Month({ isAuthtorized }: { isAuthtorized: boolean }) {
             className="month__changeMonthBtn common-button"
             type="button"
             onClick={handlerButtonMonthBackword}>{`<`}</button>
-          <h2 className="month__header noselect">{curentDate.strMonth || ''}</h2>
+          <h2 className="month__header noselect">{currentDate.strMonth || ''}</h2>
           <button
             className="month__changeMonthBtn common-button"
             type="button"

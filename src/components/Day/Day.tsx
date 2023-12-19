@@ -1,9 +1,9 @@
 import './Day.scss';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BirthdaySign } from '../BirthdaySign/BirthdaySign';
 import {
-  converMyDateToMonthDayStr,
-  converServerDateToMonthDayStr,
+  convertMyDateToMonthDayStr,
+  convertServerDateToMonthDayStr,
   convertMyDateToStr,
   createNewDate
 } from '../../utils/functions/dateFunctions';
@@ -18,27 +18,27 @@ export function Day({ thisDayNumber }: { thisDayNumber: number }) {
   const dispatch = useDispatch();
   const [birthdayList, setBirthdayList] = useState<IEvent[]>(INIT_EVENT_LIST);
 
-  const { curentDate } = useSelector((store: RootStore) => store.currentDateReducer);
+  const { currentDate } = useSelector((store: RootStore) => store.currentDateReducer);
   const { eventList } = useSelector((store: RootStore) => store.eventListReducer);
 
   const nowDate = new Date();
-  const thisDate = createNewDate(new Date(curentDate.year, curentDate.month - 1, thisDayNumber));
+  const thisDate = createNewDate(new Date(currentDate.year, currentDate.month - 1, thisDayNumber));
 
   useEffect(() => {
-    const thisDayStr = converMyDateToMonthDayStr(thisDate);
+    const thisDayStr = convertMyDateToMonthDayStr(thisDate);
     if (eventList?.length) {
       setBirthdayList(
         eventList.filter((e: IEvent) => {
-          return converServerDateToMonthDayStr(e.birthday) === thisDayStr;
+          return convertServerDateToMonthDayStr(e.birthday) === thisDayStr;
         })
       );
     }
-  }, [eventList, curentDate]);
+  }, [eventList, currentDate]);
 
   function isToday(): boolean {
-    return thisDayNumber === curentDate.day &&
-      curentDate.year === nowDate.getFullYear() &&
-      curentDate.month === nowDate.getMonth() + 1
+    return thisDayNumber === currentDate.day &&
+      currentDate.year === nowDate.getFullYear() &&
+      currentDate.month === nowDate.getMonth() + 1
       ? true
       : false;
   }
