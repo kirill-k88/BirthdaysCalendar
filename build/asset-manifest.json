@@ -1,23 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.47cd14d6.css",
-    "main.js": "/static/js/main.bf2cfb2f.js",
-    "static/media/header-background.gif": "/static/media/header-background.bf39a1ee0692b5644cf8.gif",
-    "static/media/month-background.jpg": "/static/media/month-background.6b953f3f0dd5c87b5c45.jpg",
-    "static/media/LiterataTT-CaptionMedium.woff2": "/static/media/LiterataTT-CaptionMedium.969f2e55b3f606b0f636.woff2",
-    "static/media/LiterataTT-CaptionBold.woff2": "/static/media/LiterataTT-CaptionBold.360d8395bf268d25cb67.woff2",
-    "static/media/LiterataTT-CaptionMediumItalic.woff2": "/static/media/LiterataTT-CaptionMediumItalic.d29bebe65bc9331bd3f6.woff2",
-    "static/media/LiterataTT-CaptionBoldItalic.woff2": "/static/media/LiterataTT-CaptionBoldItalic.9c4fc212fc45d454369d.woff2",
-    "static/media/LiterataTT-CaptionItalic.woff2": "/static/media/LiterataTT-CaptionItalic.77f61887a1c748803709.woff2",
-    "static/media/LiterataTT-CaptionRegular.woff2": "/static/media/LiterataTT-CaptionRegular.cbe43a2070547fabc77b.woff2",
-    "static/media/header-auth-btn.png": "/static/media/header-auth-btn.65966556c1acc80062a2.png",
-    "static/media/month-side-decoration.png": "/static/media/month-side-decoration.6e89f6ee3c213d9ed675.png",
-    "index.html": "/index.html",
-    "main.47cd14d6.css.map": "/static/css/main.47cd14d6.css.map",
-    "main.bf2cfb2f.js.map": "/static/js/main.bf2cfb2f.js.map"
+    "main.css": "/birthdays-calendar/static/css/main.0d18c2bb.css",
+    "main.js": "/birthdays-calendar/static/js/main.e2ed6f81.js",
+    "static/media/header-background.gif": "/birthdays-calendar/static/media/header-background.bf39a1ee0692b5644cf8.gif",
+    "static/media/month-background.jpg": "/birthdays-calendar/static/media/month-background.6b953f3f0dd5c87b5c45.jpg",
+    "static/media/LiterataTT-CaptionMedium.woff2": "/birthdays-calendar/static/media/LiterataTT-CaptionMedium.969f2e55b3f606b0f636.woff2",
+    "static/media/LiterataTT-CaptionBold.woff2": "/birthdays-calendar/static/media/LiterataTT-CaptionBold.360d8395bf268d25cb67.woff2",
+    "static/media/LiterataTT-CaptionMediumItalic.woff2": "/birthdays-calendar/static/media/LiterataTT-CaptionMediumItalic.d29bebe65bc9331bd3f6.woff2",
+    "static/media/LiterataTT-CaptionBoldItalic.woff2": "/birthdays-calendar/static/media/LiterataTT-CaptionBoldItalic.9c4fc212fc45d454369d.woff2",
+    "static/media/LiterataTT-CaptionItalic.woff2": "/birthdays-calendar/static/media/LiterataTT-CaptionItalic.77f61887a1c748803709.woff2",
+    "static/media/LiterataTT-CaptionRegular.woff2": "/birthdays-calendar/static/media/LiterataTT-CaptionRegular.cbe43a2070547fabc77b.woff2",
+    "static/media/header-auth-btn.png": "/birthdays-calendar/static/media/header-auth-btn.65966556c1acc80062a2.png",
+    "static/media/month-side-decoration.png": "/birthdays-calendar/static/media/month-side-decoration.6e89f6ee3c213d9ed675.png",
+    "index.html": "/birthdays-calendar/index.html",
+    "main.0d18c2bb.css.map": "/birthdays-calendar/static/css/main.0d18c2bb.css.map",
+    "main.e2ed6f81.js.map": "/birthdays-calendar/static/js/main.e2ed6f81.js.map"
   },
-  "entrypoints": [
-    "static/css/main.47cd14d6.css",
-    "static/js/main.bf2cfb2f.js"
-  ]
+  "entrypoints": ["static/css/main.0d18c2bb.css", "static/js/main.e2ed6f81.js"]
 }
