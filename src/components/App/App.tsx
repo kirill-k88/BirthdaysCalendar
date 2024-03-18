@@ -36,9 +36,10 @@ export function App() {
             setRequestError({ requestError: (err as Error).message || 'Ошибка при запросе' })
           );
           console.log(err);
+        } finally {
+          dispatch(setIsLoading({ isLoading: false }));
+          dispatch(setNeedUpdateEventList({ needUpdateEventList: false }));
         }
-        dispatch(setIsLoading({ isLoading: false }));
-        dispatch(setNeedUpdateEventList({ needUpdateEventList: false }));
       }
     })();
   }, [isAuthtorized, needUpdateEventList]);

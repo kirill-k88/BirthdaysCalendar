@@ -1,5 +1,5 @@
 import './Day.scss';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { BirthdaySign } from '../BirthdaySign/BirthdaySign';
 import {
   convertMyDateToMonthDayStr,
@@ -14,7 +14,7 @@ import { RootStore } from '../store/store';
 import { setCurrentEvent } from '../store/currentEventSlice';
 import { setIsAddPopupVisible } from '../store/isAddPopupVisibleSlice';
 
-export function Day({ thisDayNumber }: { thisDayNumber: number }) {
+export const MemoDay = memo(function Day({ thisDayNumber }: { thisDayNumber: number }) {
   const dispatch = useDispatch();
   const [birthdayList, setBirthdayList] = useState<IEvent[]>(INIT_EVENT_LIST);
 
@@ -51,7 +51,6 @@ export function Day({ thisDayNumber }: { thisDayNumber: number }) {
     );
     dispatch(setIsAddPopupVisible({ isAddPopupVisible: true }));
   }
-
   return (
     <div
       onClick={handleClick}
@@ -65,4 +64,4 @@ export function Day({ thisDayNumber }: { thisDayNumber: number }) {
       </div>
     </div>
   );
-}
+});

@@ -1,6 +1,6 @@
 import './Month.scss';
 import { WEEKDAY_LIST } from '../../utils/constants';
-import { Day } from '../Day/Day';
+import { MemoDay } from '../Day/Day';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootStore } from '../store/store';
 
@@ -10,10 +10,12 @@ import {
   setCurrentDateNextYear,
   setCurrentDatePreviousYear
 } from '../store/currentDateSlice';
+import { useMemo } from 'react';
 
 export function Month({ isAuthtorized }: { isAuthtorized: boolean }) {
   const dispatch = useDispatch();
   const { currentDate } = useSelector((store: RootStore) => store.currentDateReducer);
+  const { eventList } = useSelector((store: RootStore) => store.eventListReducer);
 
   function getDayElementList(): JSX.Element[] {
     const daysList: JSX.Element[] = [];
@@ -23,7 +25,9 @@ export function Month({ isAuthtorized }: { isAuthtorized: boolean }) {
         daysList.push(<div key={new Date().getTime() + i}></div>);
       } else {
         daysList.push(
-          <Day key={new Date().getTime() + i} thisDayNumber={i - currentDate.firstDayofMonth}></Day>
+          <MemoDay
+            key={new Date().getTime() + i}
+            thisDayNumber={i - currentDate.firstDayofMonth}></MemoDay>
         );
       }
     }
@@ -94,7 +98,7 @@ export function Month({ isAuthtorized }: { isAuthtorized: boolean }) {
         </div>
         <div className="month__day-list">
           {getWeekDayElementList()}
-          {getDayElementList()}
+          {useMemo(() => getDayElementList(), [eventList])}
         </div>
       </div>
       <div className="month__side-decoration month__side-decoration_rigth"></div>
