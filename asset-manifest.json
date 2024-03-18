@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/birthdays-calendar/static/css/main.0d18c2bb.css",
-    "main.js": "/birthdays-calendar/static/js/main.e2ed6f81.js",
+    "main.css": "/birthdays-calendar/static/css/main.f661525c.css",
+    "main.js": "/birthdays-calendar/static/js/main.bf2cfb2f.js",
     "static/media/header-background.gif": "/birthdays-calendar/static/media/header-background.bf39a1ee0692b5644cf8.gif",
     "static/media/month-background.jpg": "/birthdays-calendar/static/media/month-background.6b953f3f0dd5c87b5c45.jpg",
     "static/media/LiterataTT-CaptionMedium.woff2": "/birthdays-calendar/static/media/LiterataTT-CaptionMedium.969f2e55b3f606b0f636.woff2",
@@ -13,8 +13,11 @@
     "static/media/header-auth-btn.png": "/birthdays-calendar/static/media/header-auth-btn.65966556c1acc80062a2.png",
     "static/media/month-side-decoration.png": "/birthdays-calendar/static/media/month-side-decoration.6e89f6ee3c213d9ed675.png",
     "index.html": "/birthdays-calendar/index.html",
-    "main.0d18c2bb.css.map": "/birthdays-calendar/static/css/main.0d18c2bb.css.map",
-    "main.e2ed6f81.js.map": "/birthdays-calendar/static/js/main.e2ed6f81.js.map"
+    "main.f661525c.css.map": "/birthdays-calendar/static/css/main.f661525c.css.map",
+    "main.bf2cfb2f.js.map": "/birthdays-calendar/static/js/main.bf2cfb2f.js.map"
   },
-  "entrypoints": ["static/css/main.0d18c2bb.css", "static/js/main.e2ed6f81.js"]
+  "entrypoints": [
+    "static/css/main.f661525c.css",
+    "static/js/main.bf2cfb2f.js"
+  ]
 }
